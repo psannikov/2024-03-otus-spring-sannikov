@@ -10,6 +10,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>cw01-spring-di</module>
+        <module>hw01-xml-config</module>
     </modules>
 
     <properties>
