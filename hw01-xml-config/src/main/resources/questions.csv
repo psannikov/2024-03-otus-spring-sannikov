@@ -2,3 +2,5 @@
 Is there life on Mars?;Science doesn't know this yet%true|Certainly. The red UFO is from Mars. And green is from Venus%false|Absolutely not%false
 How should resources be loaded form jar in Java?;ClassLoader#geResourceAsStream or ClassPathResource#getInputStream%true|ClassLoader#geResource#getFile + FileReader%false|Wingardium Leviosa%false
 Which option is a good way to handle the exception?;@SneakyThrow%false|e.printStackTrace()%false|Rethrow with wrapping in business exception (for example, QuestionReadException)%true|Ignoring exception%false
+How many letters are in the Russian alphabet?;23%false|32%false|32%true
+Finish the phrase "Don't have a hundred rubles, but have ...";100 friends%true|1000 rubles%false|1000 dollars%false.
