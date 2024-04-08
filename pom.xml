@@ -19,6 +19,7 @@
     <modules>
         <module>cw01-spring-di</module>
         <module>hw01-xml-config</module>
+        <module>cw02-architecture</module>
     </modules>
 
     <properties>
