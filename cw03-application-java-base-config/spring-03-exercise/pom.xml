@@ -7,11 +7,10 @@
         <groupId>ru.otus.spring.psannikov</groupId>
         <artifactId>OtusSpring</artifactId>
         <version>1.0-SNAPSHOT</version>
+        <relativePath>../../pom.xml</relativePath>
     </parent>
 
-    <artifactId>cw02-architecture</artifactId>
-
-    <packaging>pom</packaging>
+    <artifactId>spring-03-exercise</artifactId>
 
     <properties>
         <maven.compiler.source>21</maven.compiler.source>
@@ -19,18 +18,12 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
-    <modules>
-        <module>solution01</module>
-        <module>solution02_codeface</module>
-        <module>solution03_kiss</module>
-        <module>solution04_kiss</module>
-        <module>solution05_dry</module>
-        <module>solution06_dry</module>
-        <module>solution07_srp</module>
-        <module>solution08_srp</module>
-        <module>solution09_dip</module>
-        <module>solution10_ocp_isp</module>
-        <module>solution10_ocp_isp_spring</module>
-    </modules>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>6.1.5</version>
+        </dependency>
+    </dependencies>
 
 </project>
