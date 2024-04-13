@@ -15,7 +15,7 @@
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <spring.version>6.1.4</spring.version>
+        <spring.version>6.1.5</spring.version>
         <opencsv.version>5.8</opencsv.version>
         <junit.version>5.10.2</junit.version>
         <mockito.version>5.4.0</mockito.version>
@@ -29,6 +29,7 @@
     </properties>
 
     <dependencies>
+
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>

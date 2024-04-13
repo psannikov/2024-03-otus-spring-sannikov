@@ -1,9 +1,11 @@
 package ru.otus.spring.hw02.application.config.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 import ru.otus.spring.hw02.application.config.config.TestConfig;
 import ru.otus.spring.hw02.application.config.domain.TestResult;
 
+@Service
 @RequiredArgsConstructor
 public class ResultServiceImpl implements ResultService {
 
@@ -13,6 +15,7 @@ public class ResultServiceImpl implements ResultService {
 
     @Override
     public void showResult(TestResult testResult) {
+        System.out.println(testConfig.getRightAnswersCountToPass());
         ioService.printLine("");
         ioService.printLine("Test results: ");
         ioService.printFormattedLine("Student: %s", testResult.getStudent().getFullName());
