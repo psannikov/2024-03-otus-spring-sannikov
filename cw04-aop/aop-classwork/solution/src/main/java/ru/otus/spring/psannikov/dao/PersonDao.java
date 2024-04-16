@@ -1,6 +1,6 @@
 package ru.otus.spring.psannikov.dao;
 
-import ru.otus.spring.domain.Person;
+import ru.otus.spring.psannikov.domain.Person;
 
 public interface PersonDao {
 

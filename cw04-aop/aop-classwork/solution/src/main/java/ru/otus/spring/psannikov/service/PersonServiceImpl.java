@@ -2,8 +2,8 @@ package ru.otus.spring.psannikov.service;
 
 import org.springframework.stereotype.Service;
 
-import ru.otus.spring.dao.PersonDao;
-import ru.otus.spring.domain.Person;
+import ru.otus.spring.psannikov.dao.PersonDao;
+import ru.otus.spring.psannikov.domain.Person;
 
 @Service
 public class PersonServiceImpl implements PersonService {
