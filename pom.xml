@@ -8,6 +8,12 @@
     <artifactId>OtusSpring</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.2.4</version>
+    </parent>
+
     <developers>
         <developer>
             <name>sannikovpv</name>
@@ -25,6 +31,7 @@
         <module>cw03-application-java-base-config/spring-03-solution</module>
         <module>hw02-annotation-config</module>
         <module>cw04-aop</module>
+        <module>cw05-spring-boot</module>
     </modules>
 
     <properties>
