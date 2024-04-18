@@ -32,6 +32,7 @@
         <module>hw02-annotation-config</module>
         <module>cw04-aop</module>
         <module>cw05-spring-boot</module>
+        <module>hw03-spring-boot</module>
     </modules>
 
     <properties>
