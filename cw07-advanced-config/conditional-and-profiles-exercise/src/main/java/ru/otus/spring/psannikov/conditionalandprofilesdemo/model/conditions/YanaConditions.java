@@ -1,9 +1,9 @@
 package ru.otus.spring.psannikov.conditionalandprofilesdemo.model.conditions;
 
-import org.springframework.boot.autoconfigure.condition.AllNestedConditions;
+import org.springframework.boot.autoconfigure.condition.AnyNestedCondition;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 
-public class YanaConditions extends AllNestedConditions {
+public class YanaConditions extends AnyNestedCondition {
 
     public YanaConditions() {
         super(ConfigurationPhase.PARSE_CONFIGURATION);
