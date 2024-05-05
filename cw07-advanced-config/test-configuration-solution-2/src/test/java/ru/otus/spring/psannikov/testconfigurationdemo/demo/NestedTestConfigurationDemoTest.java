@@ -18,7 +18,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @DisplayName("В NestedTestConfigurationDemoTest семья должна ")
 @SpringBootTest
 //@SpringBootTest(properties = "spring.main.allow-bean-definition-overriding=true")
-//@TestPropertySource(properties = "spring.main.allow-bean-definition-overriding=true")
+@TestPropertySource(properties = "spring.main.allow-bean-definition-overriding=true")
 public class NestedTestConfigurationDemoTest {
 
     @TestConfiguration
@@ -28,7 +28,6 @@ public class NestedTestConfigurationDemoTest {
             return new Father();
         }
 
-/*
         @Bean
         FamilyMember dog() {
             return new Dog() {
@@ -38,7 +37,6 @@ public class NestedTestConfigurationDemoTest {
                 }
             };
         }
-*/
     }
 
     @Autowired
