@@ -34,6 +34,9 @@
         <module>cw05-spring-boot</module>
         <module>cw06-scopes-lifecycle</module>
         <module>cw07-advanced-config</module>
+        <module>cw08-home-work</module>
+        <module>cw08-home-work/ioservice-replacing-example</module>
+        <module>cw08-home-work/unit-testing-pure-spring-parallel</module>
     </modules>
 
     <properties>
