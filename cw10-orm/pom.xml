@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>ru.otus.spring.psannikov</groupId>
+        <artifactId>OtusSpring</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>cw10-orm</artifactId>
+    <packaging>pom</packaging>
+    <modules>
+        <module>demo-projects</module>
+        <module>demo-projects/mybatis-demo</module>
+        <module>demo-projects/spring-jdbc-demo</module>
+        <module>demo-projects/spring-jpa-ineritance-demo</module>
+        <module>orm-class-work</module>
+        <module>orm-class-work/orm-exercise</module>
+        <module>orm-class-work/orm-solution-01</module>
+        <module>orm-class-work/orm-solution-02</module>
+        <module>orm-class-work/orm-solution-03</module>
+        <module>orm-class-work/orm-solution-04</module>
+        <module>orm-class-work/orm-solution-05</module>
+        <module>orm-class-work/orm-solution-06</module>
+        <module>orm-class-work/orm-solution-07</module>
+        <module>orm-class-work/orm-solution-08</module>
+        <module>orm-class-work/orm-solution-final</module>
+    </modules>
+
+    <properties>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+</project>
