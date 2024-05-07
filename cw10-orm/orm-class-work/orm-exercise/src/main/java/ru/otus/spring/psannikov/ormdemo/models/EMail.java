@@ -9,7 +9,11 @@ import jakarta.persistence.*;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Entity
+@Table(name = "emails")
 public class EMail {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String email;
 }

@@ -9,7 +9,14 @@ import jakarta.persistence.*;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Entity
+@Table(name = "avatars")
 public class Avatar {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String photoUrl;
+
+    @OneToOne(mappedBy = "avatar")
+    private OtusStudent student;
 }
