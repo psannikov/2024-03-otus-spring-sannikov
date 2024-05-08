@@ -5,8 +5,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import ru.otus.spring.psannikov.spring.boot.service.TestRunnerService;
 
-import java.util.Locale;
-
 @SpringBootApplication
 public class Application {
     public static void main(String[] args) {

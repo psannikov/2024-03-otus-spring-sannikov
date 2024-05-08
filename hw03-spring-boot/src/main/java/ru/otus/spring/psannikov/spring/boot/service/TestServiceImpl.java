@@ -4,8 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.otus.spring.psannikov.spring.boot.dao.QuestionDao;
 import ru.otus.spring.psannikov.spring.boot.domain.Answer;
-import ru.otus.spring.psannikov.spring.boot.domain.Student;
 import ru.otus.spring.psannikov.spring.boot.domain.Question;
+import ru.otus.spring.psannikov.spring.boot.domain.Student;
 import ru.otus.spring.psannikov.spring.boot.domain.TestResult;
 
 @Service
@@ -25,7 +25,7 @@ public class TestServiceImpl implements TestService {
         var questions = questionDao.findAll();
         var testResult = new TestResult(student);
 
-        for (var question: questions) {
+        for (var question : questions) {
             var isAnswerValid = false; // Задать вопрос, получить ответ
             var answer = ioService.readStringWithPrompt(question.text());
             if (answer.equals(getCorrectAnswer(question))) {

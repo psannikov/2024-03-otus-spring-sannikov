@@ -14,7 +14,7 @@ public class AppProperties implements TestConfig, TestFileNameProvider, LocaleCo
     private final int rightAnswersCountToPass;
 
     @Getter
-    private Locale locale;
+    private final Locale locale;
 
     private final Map<String, String> fileNameByLocaleTag;
 
@@ -25,14 +25,8 @@ public class AppProperties implements TestConfig, TestFileNameProvider, LocaleCo
         this.fileNameByLocaleTag = fileNameByLocaleTag;
     }
 
-//    public void setLocale(String locale) {
-//        this.locale = Locale.forLanguageTag(locale);
-//    }
-
     @Override
     public String getTestFileName() {
-        System.out.println(locale.getDisplayLanguage());
-        System.out.println(fileNameByLocaleTag.get(locale.getDisplayLanguage()));
-        return fileNameByLocaleTag.get(locale.getDisplayLanguage());
+        return fileNameByLocaleTag.get(locale.toLanguageTag());
     }
 }
