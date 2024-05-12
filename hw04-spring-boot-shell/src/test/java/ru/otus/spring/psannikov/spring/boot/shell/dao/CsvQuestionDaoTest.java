@@ -23,6 +23,12 @@ public class CsvQuestionDaoTest {
     final static String QUESTION = "How many letters are in the Russian alphabet?";
 
     @Test
+    void testGetFileFromResourceAsStream ()
+    {
+
+    }
+
+    @Test
     void testFindAll() {
         when (fileNameProvider.getTestFileName()).thenReturn(QUESTIONS_FILE_NAME_TEST);
         var listQuestions = csvQuestionDao.findAll();

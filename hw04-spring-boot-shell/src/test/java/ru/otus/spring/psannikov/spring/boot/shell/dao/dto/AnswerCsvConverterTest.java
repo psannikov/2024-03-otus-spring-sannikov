@@ -24,7 +24,7 @@ public class AnswerCsvConverterTest {
     }
 
     @Test
-    void shouldContainAllFamilyExceptFather() {
+    void shouldConvertStrToAnswer() {
         Object answer = answerCsvConverter.convertToRead(row);
         assertEquals(new Answer(answerText,answerBoolean), answer);
     }

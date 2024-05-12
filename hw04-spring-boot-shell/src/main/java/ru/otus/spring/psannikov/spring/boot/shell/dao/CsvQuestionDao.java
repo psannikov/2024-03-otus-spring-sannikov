@@ -20,6 +20,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @Component
 public class CsvQuestionDao implements QuestionDao {
+
     @Autowired
     private final AppProperties appProperties;
 
