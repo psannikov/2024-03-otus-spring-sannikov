@@ -3,6 +3,7 @@ package ru.otus.spring.psannikov.spring.boot.shell.dao;
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.otus.spring.psannikov.spring.boot.shell.config.AppProperties;
 import ru.otus.spring.psannikov.spring.boot.shell.config.TestFileNameProvider;
@@ -19,6 +20,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @Component
 public class CsvQuestionDao implements QuestionDao {
+    @Autowired
     private final AppProperties appProperties;
 
     private final TestFileNameProvider fileNameProvider;
