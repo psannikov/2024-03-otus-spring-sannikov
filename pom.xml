@@ -33,6 +33,18 @@
         <module>cw04-aop</module>
         <module>cw05-spring-boot</module>
         <module>hw03-spring-boot</module>
+        <module>cw06-scopes-lifecycle</module>
+        <module>cw07-advanced-config</module>
+        <module>cw08-home-work</module>
+        <module>cw08-home-work/ioservice-replacing-example</module>
+        <module>cw08-home-work/unit-testing-pure-spring-parallel</module>
+        <module>cw09-jdbc</module>
+        <module>cw09-jdbc/jdbc-demo-exercise</module>
+        <module>cw09-jdbc/jdbc-demo-solution-3</module>
+        <module>cw09-jdbc/jdbc-demo-solution-4</module>
+        <module>cw09-jdbc/jdbc-demo-solution-5</module>
+        <module>cw09-jdbc/jdbc-demo-solution-final</module>
+        <module>cw10-orm</module>
     </modules>
 
     <properties>
