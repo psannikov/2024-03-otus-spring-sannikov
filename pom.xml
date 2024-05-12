@@ -32,6 +32,7 @@
         <module>hw02-annotation-config</module>
         <module>cw04-aop</module>
         <module>cw05-spring-boot</module>
+        <module>hw03-spring-boot</module>
         <module>cw06-scopes-lifecycle</module>
         <module>cw07-advanced-config</module>
         <module>cw08-home-work</module>
