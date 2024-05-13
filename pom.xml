@@ -32,6 +32,7 @@
         <module>hw02-annotation-config</module>
         <module>cw04-aop</module>
         <module>cw05-spring-boot</module>
+        <module>hw03-spring-boot</module>
         <module>cw06-scopes-lifecycle</module>
         <module>cw07-advanced-config</module>
         <module>cw08-home-work</module>
@@ -45,6 +46,7 @@
         <module>cw09-jdbc/jdbc-demo-solution-final</module>
         <module>cw10-orm</module>
         <module>hw04-spring-boot-shell</module>
+        <module>hw05-jdbc</module>
     </modules>
 
     <properties>
