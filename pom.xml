@@ -46,6 +46,17 @@
         <module>cw09-jdbc/jdbc-demo-solution-final</module>
         <module>cw10-orm</module>
         <module>hw05-jdbc</module>
+        <module>cw11-jpql</module>
+        <module>cw11-jpql/jpql-demo</module>
+        <module>cw11-jpql/jpql-class-work</module>
+        <module>cw11-jpql/jpql-class-work/jpql-exercise</module>
+        <module>cw11-jpql/jpql-class-work/jpql-solution-01</module>
+        <module>cw11-jpql/jpql-class-work/jpql-solution-02</module>
+        <module>cw11-jpql/jpql-class-work/jpql-solution-03</module>
+        <module>cw11-jpql/jpql-class-work/jpql-solution-04</module>
+        <module>cw11-jpql/jpql-class-work/jpql-solution-05</module>
+        <module>cw11-jpql/jpql-class-work/jpql-solution-06</module>
+        <module>cw11-jpql/jpql-class-work/jpql-solution-final</module>
     </modules>
 
     <properties>
