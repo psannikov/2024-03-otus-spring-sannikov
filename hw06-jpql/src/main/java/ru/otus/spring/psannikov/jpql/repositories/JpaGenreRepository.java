@@ -1,49 +1,32 @@
 package ru.otus.spring.psannikov.jpql.repositories;
 
-import org.springframework.jdbc.core.RowMapper;
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.TypedQuery;
 import org.springframework.stereotype.Repository;
 import ru.otus.spring.psannikov.jpql.models.Genre;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 @Repository
 public class JpaGenreRepository implements GenreRepository {
 
-    private final NamedParameterJdbcOperations namedParameterJdbcOperations;
+    @PersistenceContext
+    private final EntityManager em;
 
-    public JpaGenreRepository(NamedParameterJdbcOperations namedParameterJdbcOperations) {
-        this.namedParameterJdbcOperations = namedParameterJdbcOperations;
+    public JpaGenreRepository(EntityManager em) {
+        this.em = em;
     }
 
     @Override
     public List<Genre> findAll() {
-        return namedParameterJdbcOperations.query(
-                "select id, name from genres",
-                new GnreRowMapper());
+        TypedQuery<Genre> query = em.createQuery("select g from Genre g", Genre.class);
+        return query.getResultList();
     }
 
     @Override
     public Optional<Genre> findById(long id) {
-        Map<String, Object> params = Collections.singletonMap("id", id);
-        return Optional.ofNullable(namedParameterJdbcOperations.queryForObject(
-                "select id, name from genres where id = :id",
-                params,
-                new GnreRowMapper()));
-    }
-
-    private static class GnreRowMapper implements RowMapper<Genre> {
-
-        @Override
-        public Genre mapRow(ResultSet rs, int i) throws SQLException {
-            var id = rs.getLong("id");
-            var name = rs.getString("name");
-            return new Genre(id, name);
-        }
+        return Optional.ofNullable(em.find(Genre.class, id));
     }
 }
