@@ -1,14 +1,13 @@
 package ru.otus.spring.psannikov.jpql.repositories;
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
-import jakarta.persistence.Query;
-import jakarta.persistence.TypedQuery;
+import jakarta.persistence.*;
 import org.springframework.stereotype.Repository;
 import ru.otus.spring.psannikov.jpql.models.Book;
 
 import java.util.List;
 import java.util.Optional;
+
+import static org.springframework.data.jpa.repository.EntityGraph.EntityGraphType.FETCH;
 
 @Repository
 public class JpaBookRepository implements BookRepository {
@@ -27,7 +26,13 @@ public class JpaBookRepository implements BookRepository {
 
     @Override
     public List<Book> findAll() {
-        TypedQuery<Book> query = em.createQuery("select b from Book b ", Book.class);
+        EntityGraph<?> entityGraphAuthors = em.getEntityGraph("books-authors-entity-graph");
+        EntityGraph<?> entityGraphGenres = em.getEntityGraph("books-genres-entity-graph");
+        TypedQuery<Book> query = em.createQuery("select b from Book b " +
+                "left join fetch b.author " +
+                "left join fetch b.genre", Book.class);
+        query.setHint(FETCH.getKey(), entityGraphAuthors);
+        query.setHint(FETCH.getKey(), entityGraphGenres);
         return query.getResultList();
     }
 

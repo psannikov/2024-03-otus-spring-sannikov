@@ -5,8 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 
 
 @Setter
@@ -15,6 +13,10 @@ import org.hibernate.annotations.FetchMode;
 @NoArgsConstructor
 @Entity
 @Table(name = "books")
+@NamedEntityGraph(name = "books-authors-entity-graph",
+        attributeNodes = {@NamedAttributeNode("author")})
+@NamedEntityGraph(name = "books-genres-entity-graph",
+        attributeNodes = {@NamedAttributeNode("genre")})
 public class Book {
 
     @Id
