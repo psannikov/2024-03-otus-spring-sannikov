@@ -14,9 +14,9 @@ import java.util.Optional;
 @Service
 public class CommentServiceImpl implements CommentService {
 
-    private CommentRepository commentRepository;
+    private final CommentRepository commentRepository;
 
-    private BookRepository bookRepository;
+    private final BookRepository bookRepository;
 
     @Override
     public Optional<Comment> findById(long id) {

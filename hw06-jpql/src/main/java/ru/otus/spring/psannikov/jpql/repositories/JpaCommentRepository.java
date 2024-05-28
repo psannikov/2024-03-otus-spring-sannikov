@@ -45,10 +45,17 @@ public class JpaCommentRepository implements CommentRepository {
     @Override
     public List<Comment> findAllByBookId(long id) {
         EntityGraph<?> entityGraphBook = em.getEntityGraph("books-books-entity-graph");
-        TypedQuery<Comment> query = em.createQuery("select c from Comment c " +
-                "left join fetch c.book " +
-                "where c.book_id = :id", Comment.class);
+        EntityGraph<?> entityGraphAuthors = em.getEntityGraph("books-authors-entity-graph");
+        EntityGraph<?> entityGraphGenres = em.getEntityGraph("books-genres-entity-graph");
+        TypedQuery<Comment> query = em.createQuery("select distinct c from Comment c " +
+                "left join fetch c.book b " +
+                "left join fetch b.author " +
+                "left join fetch b.genre " +
+                "where b.id = :id", Comment.class);
+        query.setParameter("id", id);
         query.setHint(FETCH.getKey(), entityGraphBook);
+        query.setHint(FETCH.getKey(), entityGraphAuthors);
+        query.setHint(FETCH.getKey(), entityGraphGenres);
         return query.getResultList();
     }
 
