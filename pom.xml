@@ -65,6 +65,13 @@
         <module>cw13-data-jpa/solution-02</module>
         <module>cw13-data-jpa/solution-03</module>
         <module>cw13-data-jpa/solution-04</module>
+        <module>cw15-data-nosql</module>
+        <module>cw15-data-nosql/spring-data-keyvalue-class-work</module>
+        <module>cw15-data-nosql/spring-data-keyvalue-class-work/spring-data-keyvalue-exercise</module>
+        <module>cw15-data-nosql/spring-data-keyvalue-class-work/spring-data-keyvalue-solution</module>
+        <module>cw15-data-nosql/spring-data-mongo-class-work</module>
+        <module>cw15-data-nosql/spring-data-mongo-class-work/spring-data-mongo-exercise</module>
+        <module>cw15-data-nosql/spring-data-mongo-class-work/spring-data-mongo-solution</module>
     </modules>
 
     <properties>
