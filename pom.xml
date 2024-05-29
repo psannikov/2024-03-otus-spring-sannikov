@@ -59,6 +59,13 @@
         <module>cw11-jpql/jpql-class-work/jpql-solution-06</module>
         <module>cw11-jpql/jpql-class-work/jpql-solution-final</module>
         <module>hw06-jpql</module>
+        <module>cw13-data-jpa</module>
+        <module>cw13-data-jpa/demo</module>
+        <module>cw13-data-jpa/cw13-exercise</module>
+        <module>cw13-data-jpa/solution-01</module>
+        <module>cw13-data-jpa/solution-02</module>
+        <module>cw13-data-jpa/solution-03</module>
+        <module>cw13-data-jpa/solution-04</module>
     </modules>
 
     <properties>
