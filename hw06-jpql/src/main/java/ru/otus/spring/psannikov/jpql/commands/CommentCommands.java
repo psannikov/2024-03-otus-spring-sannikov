@@ -3,9 +3,7 @@ package ru.otus.spring.psannikov.jpql.commands;
 import lombok.RequiredArgsConstructor;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
-import ru.otus.spring.psannikov.jpql.converters.BookConverter;
 import ru.otus.spring.psannikov.jpql.converters.CommentConverter;
-import ru.otus.spring.psannikov.jpql.services.BookService;
 import ru.otus.spring.psannikov.jpql.services.CommentService;
 
 import java.util.stream.Collectors;

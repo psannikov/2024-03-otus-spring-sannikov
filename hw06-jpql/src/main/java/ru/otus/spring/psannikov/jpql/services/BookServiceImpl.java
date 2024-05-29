@@ -30,16 +30,19 @@ public class BookServiceImpl implements BookService {
         return bookRepository.findAll();
     }
 
+
     @Override
     public Book insert(String title, long authorId, long genreId) {
         return save(0, title, authorId, genreId);
     }
 
+    //    @Transactional
     @Override
     public Book update(long id, String title, long authorId, long genreId) {
         return save(id, title, authorId, genreId);
     }
 
+    //    @Transactional
     @Override
     public void deleteById(long id) {
         bookRepository.deleteById(id);
