@@ -43,6 +43,7 @@ public class CommentServiceImpl implements CommentService {
         commentRepository.deleteById(id);
     }
 
+    @Transactional(readOnly = true)
     @Override
     public List<Comment> findAllByBookId(long id) {
         return commentRepository.findAllByBookId(id);

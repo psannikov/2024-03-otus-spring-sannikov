@@ -2,7 +2,6 @@ package ru.otus.spring.psannikov.jpql.repositories;
 
 import jakarta.persistence.*;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 import ru.otus.spring.psannikov.jpql.models.Book;
 
 import java.util.List;
@@ -20,13 +19,20 @@ public class JpaBookRepository implements BookRepository {
         this.em = em;
     }
 
-    @Transactional(readOnly = true)
     @Override
     public Optional<Book> findById(long id) {
-        return Optional.ofNullable(em.find(Book.class, id));
+        EntityGraph<?> entityGraphAuthors = em.getEntityGraph("books-authors-entity-graph");
+        EntityGraph<?> entityGraphGenres = em.getEntityGraph("books-genres-entity-graph");
+        TypedQuery<Book> query = em.createQuery("select b from Book b " +
+                "left join fetch b.author " +
+                "left join fetch b.genre " +
+                "where b.id = :id", Book.class);
+        query.setParameter("id", id);
+        query.setHint(FETCH.getKey(), entityGraphAuthors);
+        query.setHint(FETCH.getKey(), entityGraphGenres);
+        return Optional.of(query.getSingleResult());
     }
 
-    @Transactional(readOnly = true)
     @Override
     public List<Book> findAll() {
         EntityGraph<?> entityGraphAuthors = em.getEntityGraph("books-authors-entity-graph");
@@ -39,7 +45,6 @@ public class JpaBookRepository implements BookRepository {
         return query.getResultList();
     }
 
-    @Transactional
     @Override
     public Book save(Book book) {
         if (book.getId() == 0) {
@@ -49,7 +54,6 @@ public class JpaBookRepository implements BookRepository {
         return em.merge(book);
     }
 
-    @Transactional
     @Override
     public void deleteById(long id) {
         Query query = em.createQuery("delete " +
