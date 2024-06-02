@@ -15,10 +15,6 @@ import java.util.Objects;
 @NoArgsConstructor
 @Entity
 @Table(name = "books")
-@NamedEntityGraph(name = "books-authors-entity-graph",
-        attributeNodes = {@NamedAttributeNode("author")})
-@NamedEntityGraph(name = "books-genres-entity-graph",
-        attributeNodes = {@NamedAttributeNode("genre")})
 public class Book {
 
     @Id
@@ -28,11 +24,11 @@ public class Book {
     @Column(name = "title", nullable = false, unique = true)
     private String title;
 
-    @ManyToOne(targetEntity = Author.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne(targetEntity = Author.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "author_id")
     private Author author;
 
-    @ManyToOne(targetEntity = Genre.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne(targetEntity = Genre.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "genre_id")
     private Genre genre;
 
@@ -45,10 +41,7 @@ public class Book {
             return false;
         }
         Book book = (Book) o;
-        return id == book.id
-                && Objects.equals(title, book.title)
-                && Objects.equals(author, book.author)
-                && Objects.equals(genre, book.genre);
+        return id == book.id;
     }
 
     @Override

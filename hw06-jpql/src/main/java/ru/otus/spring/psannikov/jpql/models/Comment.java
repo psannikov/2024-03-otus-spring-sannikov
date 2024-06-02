@@ -14,14 +14,12 @@ import java.util.Objects;
 @NoArgsConstructor
 @Entity
 @Table(name = "comments")
-@NamedEntityGraph(name = "books-books-entity-graph",
-        attributeNodes = {@NamedAttributeNode("book")})
 public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @ManyToOne(targetEntity = Book.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne(targetEntity = Book.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "book_id")
     private Book book;
 
@@ -37,9 +35,7 @@ public class Comment {
             return false;
         }
         Comment comment = (Comment) o;
-        return id == comment.id
-                && Objects.equals(book, comment.book)
-                && Objects.equals(fullComment, comment.fullComment);
+        return id == comment.id;
     }
 
     @Override

@@ -21,27 +21,19 @@ public class JpaBookRepository implements BookRepository {
 
     @Override
     public Optional<Book> findById(long id) {
-        EntityGraph<?> entityGraphAuthors = em.getEntityGraph("books-authors-entity-graph");
-        EntityGraph<?> entityGraphGenres = em.getEntityGraph("books-genres-entity-graph");
         TypedQuery<Book> query = em.createQuery("select b from Book b " +
                 "left join fetch b.author " +
                 "left join fetch b.genre " +
                 "where b.id = :id", Book.class);
         query.setParameter("id", id);
-        query.setHint(FETCH.getKey(), entityGraphAuthors);
-        query.setHint(FETCH.getKey(), entityGraphGenres);
         return Optional.of(query.getSingleResult());
     }
 
     @Override
     public List<Book> findAll() {
-        EntityGraph<?> entityGraphAuthors = em.getEntityGraph("books-authors-entity-graph");
-        EntityGraph<?> entityGraphGenres = em.getEntityGraph("books-genres-entity-graph");
         TypedQuery<Book> query = em.createQuery("select b from Book b " +
                 "left join fetch b.author " +
                 "left join fetch b.genre", Book.class);
-        query.setHint(FETCH.getKey(), entityGraphAuthors);
-        query.setHint(FETCH.getKey(), entityGraphGenres);
         return query.getResultList();
     }
 
@@ -56,11 +48,8 @@ public class JpaBookRepository implements BookRepository {
 
     @Override
     public void deleteById(long id) {
-        Query query = em.createQuery("delete " +
-                "from Book b " +
-                "where b.id = :id");
-        query.setParameter("id", id);
-        query.executeUpdate();
+        var book = findById(id).get();
+        em.remove(book);
     }
 
 }

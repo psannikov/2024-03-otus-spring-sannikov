@@ -21,18 +21,12 @@ public class JpaCommentRepository implements CommentRepository {
 
     @Override
     public Optional<Comment> findById(long id) {
-        EntityGraph<?> entityGraphBook = em.getEntityGraph("books-books-entity-graph");
-        EntityGraph<?> entityGraphAuthors = em.getEntityGraph("books-authors-entity-graph");
-        EntityGraph<?> entityGraphGenres = em.getEntityGraph("books-genres-entity-graph");
         TypedQuery<Comment> query = em.createQuery("select distinct c from Comment c " +
                 "LEFT JOIN FETCH c.book b " +
                 "LEFT JOIN FETCH b.author " +
                 "LEFT JOIN FETCH b.genre " +
                 "where c.id = :id", Comment.class);
         query.setParameter("id", id);
-        query.setHint(FETCH.getKey(), entityGraphBook);
-        query.setHint(FETCH.getKey(), entityGraphAuthors);
-        query.setHint(FETCH.getKey(), entityGraphGenres);
         return Optional.of(query.getSingleResult());
     }
 
@@ -56,18 +50,12 @@ public class JpaCommentRepository implements CommentRepository {
 
     @Override
     public List<Comment> findAllByBookId(long id) {
-        EntityGraph<?> entityGraphBook = em.getEntityGraph("books-books-entity-graph");
-        EntityGraph<?> entityGraphAuthors = em.getEntityGraph("books-authors-entity-graph");
-        EntityGraph<?> entityGraphGenres = em.getEntityGraph("books-genres-entity-graph");
         TypedQuery<Comment> query = em.createQuery("select distinct c from Comment c " +
                 "LEFT JOIN FETCH c.book b " +
                 "LEFT JOIN FETCH b.author " +
                 "LEFT JOIN FETCH b.genre " +
                 "where b.id = :id", Comment.class);
         query.setParameter("id", id);
-        query.setHint(FETCH.getKey(), entityGraphBook);
-        query.setHint(FETCH.getKey(), entityGraphAuthors);
-        query.setHint(FETCH.getKey(), entityGraphGenres);
         return query.getResultList();
     }
 
