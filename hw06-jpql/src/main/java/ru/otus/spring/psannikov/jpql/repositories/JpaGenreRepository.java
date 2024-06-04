@@ -3,13 +3,13 @@ package ru.otus.spring.psannikov.jpql.repositories;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Component;
 import ru.otus.spring.psannikov.jpql.models.Genre;
 
 import java.util.List;
 import java.util.Optional;
 
-@Repository
+@Component
 public class JpaGenreRepository implements GenreRepository {
 
     @PersistenceContext

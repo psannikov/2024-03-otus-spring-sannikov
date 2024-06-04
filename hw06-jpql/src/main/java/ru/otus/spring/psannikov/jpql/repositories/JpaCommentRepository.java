@@ -1,15 +1,16 @@
 package ru.otus.spring.psannikov.jpql.repositories;
 
-import jakarta.persistence.*;
-import org.springframework.stereotype.Repository;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.Query;
+import jakarta.persistence.TypedQuery;
+import org.springframework.stereotype.Component;
 import ru.otus.spring.psannikov.jpql.models.Comment;
 
 import java.util.List;
 import java.util.Optional;
 
-import static org.springframework.data.jpa.repository.EntityGraph.EntityGraphType.FETCH;
-
-@Repository
+@Component
 public class JpaCommentRepository implements CommentRepository {
 
     @PersistenceContext
