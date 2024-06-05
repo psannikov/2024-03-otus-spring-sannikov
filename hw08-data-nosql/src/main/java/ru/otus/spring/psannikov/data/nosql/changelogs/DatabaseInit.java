@@ -19,19 +19,13 @@ public class DatabaseInit {
 
     private Author author2;
 
-    private Author author3;
-
     private Genre genre1;
 
     private Genre genre2;
 
-    private Genre genre3;
-
     private Book book1;
 
     private Book book2;
-
-    private Book book3;
 
     @ChangeSet(order = "001", id = "dropDb", author = "psannikov", runAlways = true)
     public void dropDb(MongoDatabase db) {
@@ -42,21 +36,21 @@ public class DatabaseInit {
     public void insertAuthors (AuthorRepository repository) {
         author1 = repository.save(new Author("Author_1"));
         author2 = repository.save(new Author("Author_2"));
-        author3 = repository.save(new Author("Author_3"));
+        repository.save(new Author("Author_3"));
     }
 
     @ChangeSet(order = "003", id = "insertGenre", author = "psannikov")
     public void insertGenres (GenreRepository repository) {
         genre1 = repository.save(new Genre("Genre_1"));
         genre2 = repository.save(new Genre("Genre_2"));
-        genre3 = repository.save(new Genre("Genre_3"));
+        repository.save(new Genre("Genre_3"));
     }
 
     @ChangeSet(order = "004", id = "insertBook", author = "psannikov")
     public void insertBooks (BookRepository repository) {
         book1 = repository.save(new Book("BookTitle_1", author1, genre1));
         book2 = repository.save(new Book("BookTitle_2", author2, genre2));
-        book3 = repository.save(new Book("BookTitle_3", author1, genre2));
+        repository.save(new Book("BookTitle_3", author1, genre2));
     }
 
     @ChangeSet(order = "005", id = "insertComment", author = "psannikov")
