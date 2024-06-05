@@ -56,14 +56,13 @@ public class DatabaseInit {
     public void insertBooks (BookRepository repository) {
         book1 = repository.save(new Book("BookTitle_1", author1, genre1));
         book2 = repository.save(new Book("BookTitle_2", author2, genre2));
-        book3 = repository.save(new Book("BookTitle_3", author3, genre3));
+        book3 = repository.save(new Book("BookTitle_3", author1, genre2));
     }
 
     @ChangeSet(order = "005", id = "insertComment", author = "psannikov")
     public void insertComments (CommentRepository repository) {
         repository.save(new Comment(book1, "Book1_Comment1"));
         repository.save(new Comment(book1, "Book1_Comment2"));
-        repository.save(new Comment(book2, "Book1_Comment1"));
+        repository.save(new Comment(book2, "Book1_Comment3"));
     }
-
 }

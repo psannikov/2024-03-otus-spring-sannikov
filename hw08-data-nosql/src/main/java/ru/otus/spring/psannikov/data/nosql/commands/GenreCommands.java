@@ -22,4 +22,9 @@ public class GenreCommands {
                 .map(genreConverter::genreToString)
                 .collect(Collectors.joining("," + System.lineSeparator()));
     }
+
+    @ShellMethod(value = "Delete genre by id", key = "gdel")
+    public void deleteAuthor(String id) {
+        genreService.deleteById(id);
+    }
 }

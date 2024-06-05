@@ -2,6 +2,7 @@ package ru.otus.spring.psannikov.data.nosql.services;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.otus.spring.psannikov.data.nosql.models.Genre;
 import ru.otus.spring.psannikov.data.nosql.repositories.GenreRepository;
 
@@ -21,5 +22,11 @@ public class GenreServiceImpl implements GenreService {
     @Override
     public List<Genre> findAll() {
         return genreRepository.findAll();
+    }
+
+    @Transactional
+    @Override
+    public void deleteById(String id) {
+        genreRepository.deleteById(id);
     }
 }

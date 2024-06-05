@@ -3,6 +3,7 @@ package ru.otus.spring.psannikov.data.nosql.services;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.otus.spring.psannikov.data.nosql.models.Author;
 import ru.otus.spring.psannikov.data.nosql.repositories.AuthorRepository;
 
@@ -25,4 +26,9 @@ public class AuthorServiceImpl implements AuthorService {
         return authorRepository.findAll();
     }
 
+    @Transactional
+    @Override
+    public void deleteById(String id) {
+        authorRepository.deleteById(id);
+    }
 }

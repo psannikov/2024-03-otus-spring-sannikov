@@ -11,7 +11,7 @@ public class CommentConverter {
     private final BookConverter bookConverter;
 
     public String commentToString(Comment comment) {
-        return "Id: %d, FullComment: %s, Book: {%s}"
+        return "Id: %s, FullComment: %s, Book: {%s}"
                 .formatted(comment.getId(),
                         comment.getFullComment(),
                         bookConverter.bookToString(comment.getBook()));

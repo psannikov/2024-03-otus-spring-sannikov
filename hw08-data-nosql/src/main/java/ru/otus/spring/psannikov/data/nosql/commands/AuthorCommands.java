@@ -22,4 +22,9 @@ public class AuthorCommands {
                 .map(authorConverter::authorToString)
                 .collect(Collectors.joining("," + System.lineSeparator()));
     }
+
+    @ShellMethod(value = "Delete author by id", key = "adel")
+    public void deleteAuthor(String id) {
+        authorService.deleteById(id);
+    }
 }

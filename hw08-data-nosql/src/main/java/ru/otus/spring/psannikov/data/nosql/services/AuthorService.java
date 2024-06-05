@@ -10,4 +10,6 @@ public interface AuthorService {
     Optional<Author> findById(String id);
 
     List<Author> findAll();
+
+    void deleteById(String id);
 }
