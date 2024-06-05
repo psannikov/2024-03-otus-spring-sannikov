@@ -65,6 +65,7 @@
         <module>cw13-data-jpa/solution-02</module>
         <module>cw13-data-jpa/solution-03</module>
         <module>cw13-data-jpa/solution-04</module>
+        <module>hw08-data-nosql</module>
     </modules>
 
     <properties>
