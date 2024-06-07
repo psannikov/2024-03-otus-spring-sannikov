@@ -7,30 +7,32 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
 import ru.otus.spring.psannikov.jpql.models.Author;
+import ru.otus.spring.psannikov.jpql.models.Genre;
 import ru.otus.spring.psannikov.jpql.repositories.AuthorRepository;
+import ru.otus.spring.psannikov.jpql.repositories.GenreRepository;
 
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
-@DisplayName("Сервис для Author должен")
+@DisplayName("Сервис для Genre должен")
 @DataJpaTest
-@Import(AuthorServiceImpl.class)
-public class AuthorServiceImplTest {
+@Import(GenreServiceImpl.class)
+public class GenreServiceImplTest {
 
     @Autowired
-    private AuthorServiceImpl authorService;
+    private GenreServiceImpl genreService;
 
     @MockBean
-    AuthorRepository authorRepository;
+    GenreRepository genreRepository;
 
-    @DisplayName("должен загружать всех авторов")
+    @DisplayName("должен загружать все жанры")
     @Test
     public void findAllTest() {
-        var authorsMock = List.of(new Author(1l, "Author_1"));
-        when(authorRepository.findAll()).thenReturn(authorsMock);
-        var authors = authorService.findAll();
-        assertThat(authors).isEqualTo(authorsMock);
+        var genresMock = List.of(new Genre(1l, "Genre_1"));
+        when(genreRepository.findAll()).thenReturn(genresMock);
+        var actualGenres = genreService.findAll();
+        assertThat(actualGenres).isEqualTo(genresMock);
     }
 }

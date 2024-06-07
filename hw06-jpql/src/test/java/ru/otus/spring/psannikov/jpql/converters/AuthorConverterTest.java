@@ -17,14 +17,15 @@ public class AuthorConverterTest {
     @Autowired
     private AuthorConverter authorConverter;
 
-    private static final String EXPECTED_AUTHOR_STRING = "Id: 1, FullName: Author1";
     private static final long ID = 1l;
-    private static final String AUTHOR_FIO = "Author1";
+    private static final String AUTHOR = "Author_1";
+    private static final String EXPECTED_AUTHOR_STRING = "Id: 1, FullName: Author_1";
+
 
     @DisplayName("должен вывести информацию о авторе")
     @Test
     void shouldReturnCorrectAuthorInfo() {
-        var actualAuthor = authorConverter.authorToString(new Author(ID, AUTHOR_FIO));
+        var actualAuthor = authorConverter.authorToString(new Author(ID, AUTHOR));
         assertThat(actualAuthor).isEqualTo(EXPECTED_AUTHOR_STRING);
     }
 }
