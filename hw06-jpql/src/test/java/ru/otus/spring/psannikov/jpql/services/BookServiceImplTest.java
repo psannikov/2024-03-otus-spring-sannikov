@@ -3,6 +3,7 @@ package ru.otus.spring.psannikov.jpql.services;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -18,7 +19,8 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.when;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.*;
 
 @DisplayName("Сервис для Book должен")
 @DataJpaTest
@@ -38,13 +40,18 @@ public class BookServiceImplTest {
     private BookRepository bookRepository;
 
     private final static long ID = 1l;
+    private final static String TITLE = "Title_1";
+    private final static String AUTHOR = "Author_1";
+    private final static String GENRE = "Genre_1";
     private Book mockBook;
+    private Author mockAuthor;
+    private Genre mockGenre;
 
     @BeforeEach
     public void setUp() {
-        mockBook = new Book(ID, "Title_1",
-                new Author(ID, "Author_1"),
-                new Genre(ID, "Genre_1"));
+        mockAuthor = new Author(ID, AUTHOR);
+        mockGenre = new Genre(ID, GENRE);
+        mockBook = new Book(ID, TITLE,mockAuthor,mockGenre);
     }
 
 
@@ -56,4 +63,47 @@ public class BookServiceImplTest {
         assertThat(actualBook).isNotEmpty();
         assertThat(actualBook.get()).isEqualTo(mockBook);
     }
+
+    @DisplayName("должен загружать все книги")
+    @Test
+    public void findAllTest() {
+        var booksMock = List.of(mockBook);
+        when(bookRepository.findAll()).thenReturn(booksMock);
+        var authors = bookRepository.findAll();
+        assertThat(authors).isEqualTo(booksMock);
+    }
+
+    @DisplayName("должен добавлять новую книгу")
+    @Test
+    public void insertTest() {
+        when(authorRepository.findById(ID)).thenReturn(Optional.of(mockAuthor));
+        when(genreRepository.findById(ID)).thenReturn(Optional.of(mockGenre));
+        when(bookRepository.save(Mockito.any(Book.class))).thenReturn(mockBook);
+        var book = bookService.insert(TITLE, ID, ID);
+        assertEquals(mockBook, book);
+        verify(authorRepository, times(1)).findById(ID);
+        verify(genreRepository, times(1)).findById(ID);
+        verify(bookRepository, times(1)).save(Mockito.any(Book.class));
+    }
+
+    @DisplayName("должен изменять существующую книгу")
+    @Test
+    public void updateTest() {
+        when(authorRepository.findById(ID)).thenReturn(Optional.of(mockAuthor));
+        when(genreRepository.findById(ID)).thenReturn(Optional.of(mockGenre));
+        when(bookRepository.save(Mockito.any(Book.class))).thenReturn(mockBook);
+        var book = bookService.update(ID, TITLE, ID, ID);
+        assertEquals(mockBook, book);
+        verify(authorRepository, times(1)).findById(ID);
+        verify(genreRepository, times(1)).findById(ID);
+        verify(bookRepository, times(1)).save(Mockito.any(Book.class));
+    }
+
+    @DisplayName("должен удалять существующую книгу")
+    @Test
+    public void deleteByIdTest() {
+        bookService.deleteById(ID);
+        verify(bookRepository, times(1)).deleteById(ID);
+    }
+
 }
