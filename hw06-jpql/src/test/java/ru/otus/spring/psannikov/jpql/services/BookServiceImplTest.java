@@ -69,7 +69,7 @@ public class BookServiceImplTest {
     public void findAllTest() {
         var booksMock = List.of(mockBook);
         when(bookRepository.findAll()).thenReturn(booksMock);
-        var authors = bookRepository.findAll();
+        var authors = bookService.findAll();
         assertThat(authors).isEqualTo(booksMock);
     }
 

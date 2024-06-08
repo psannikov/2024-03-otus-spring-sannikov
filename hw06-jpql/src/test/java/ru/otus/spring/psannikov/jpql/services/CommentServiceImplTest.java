@@ -3,6 +3,7 @@ package ru.otus.spring.psannikov.jpql.services;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -19,7 +20,8 @@ import ru.otus.spring.psannikov.jpql.repositories.GenreRepository;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.when;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.*;
 
 @DisplayName("Сервис для Comment должен")
 @DataJpaTest
@@ -38,11 +40,13 @@ public class CommentServiceImplTest {
     private final static long ID = 1l;
     private final static String FULL_COMMENT = "Comment_1";
     private Comment mockComment;
+    private Book mockBook;
 
 
     @BeforeEach
     public void setUp() {
-        mockComment = new Comment(ID, new Book(), FULL_COMMENT);
+        mockBook = Mockito.mock(Book.class);
+        mockComment = new Comment(ID, mockBook, FULL_COMMENT);
     }
 
 
@@ -53,5 +57,34 @@ public class CommentServiceImplTest {
         var actualComment = commentRepository.findById(ID);
         assertThat(actualComment).isNotEmpty();
         assertThat(actualComment.get()).isEqualTo(mockComment);
+    }
+
+    @DisplayName("должен добавлять новый комментарий")
+    @Test
+    public void insertTest() {
+        when(bookRepository.findById(ID)).thenReturn(Optional.of(mockBook));
+        when(commentRepository.save(Mockito.any(Comment.class))).thenReturn(mockComment);
+        var comment = commentService.insert(ID, FULL_COMMENT);
+        assertEquals(comment, mockComment);
+        verify(bookRepository, times(1)).findById(ID);
+        verify(commentRepository, times(1)).save(Mockito.any(Comment.class));
+    }
+
+    @DisplayName("должен изменять существующую книгу")
+    @Test
+    public void updateTest() {
+        when(bookRepository.findById(ID)).thenReturn(Optional.of(mockBook));
+        when(commentRepository.save(Mockito.any(Comment.class))).thenReturn(mockComment);
+        var comment = commentService.update(ID, ID, FULL_COMMENT);
+        assertEquals(comment, mockComment);
+        verify(bookRepository, times(1)).findById(ID);
+        verify(commentRepository, times(1)).save(Mockito.any(Comment.class));
+    }
+
+    @DisplayName("должен удалять существующий комментарий")
+    @Test
+    public void deleteByIdTest() {
+        commentService.deleteById(ID);
+        verify(commentRepository, times(1)).deleteById(ID);
     }
 }
