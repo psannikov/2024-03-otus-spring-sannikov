@@ -6,8 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.context.annotation.Import;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 import ru.otus.spring.psannikov.jpql.models.Author;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -15,7 +13,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 @DisplayName("Репозиторий для Author должен")
 @DataJpaTest
 @Import(JpaAuthorRepository.class)
-@Transactional(propagation = Propagation.NEVER)
 public class JpaAuthorRepositoryTest {
     @Autowired
     private JpaAuthorRepository authorRepository;
@@ -24,9 +21,8 @@ public class JpaAuthorRepositoryTest {
 
     private static final long FIRST_AUTHOR_ID = 1L;
 
-    @DisplayName("должен загружать автора по id")
+    @DisplayName("загружать автора по id")
     @Test
-    @Transactional(readOnly = true)
     void shouldReturnCorrectAuthorById() {
         var actualAuthor = authorRepository.findById(FIRST_AUTHOR_ID);
         var expectedAuthor = entityManager.find(Author.class, FIRST_AUTHOR_ID);
@@ -37,7 +33,6 @@ public class JpaAuthorRepositoryTest {
 
     @DisplayName("возвращать список всех авторов")
     @Test
-    @Transactional(readOnly = true)
     void shouldFindAllAuthors() {
         var actualAuthors = authorRepository.findAll();
         var expectedAuthors = entityManager

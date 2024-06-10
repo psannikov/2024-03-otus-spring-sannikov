@@ -28,7 +28,7 @@ public class BookConverterTest {
     @MockBean
     private GenreConverter genreConverter;
 
-    private static final long ID = 1l;
+    private static final long ID = 1L;
     private static final String TITLE = "Title_1";
     private static final String AUTHOR = "Author_1";
     private static final String GENRE = "Genre_1";
@@ -36,7 +36,7 @@ public class BookConverterTest {
     private static final String EXPECTED_AUTHOR_STRING = "Id: 1, title: Title_1, author: {Author_1}, genres: [Genre_1]";
 
 
-    @DisplayName("должен вывести информацию о книге")
+    @DisplayName("вывести информацию о книге")
     @Test
     void bookToStringTest() {
         when(authorConverter.authorToString(any())).thenReturn(AUTHOR);

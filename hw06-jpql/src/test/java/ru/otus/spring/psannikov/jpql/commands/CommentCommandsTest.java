@@ -7,13 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
-import ru.otus.spring.psannikov.jpql.converters.BookConverter;
 import ru.otus.spring.psannikov.jpql.converters.CommentConverter;
 import ru.otus.spring.psannikov.jpql.models.Author;
 import ru.otus.spring.psannikov.jpql.models.Book;
 import ru.otus.spring.psannikov.jpql.models.Comment;
 import ru.otus.spring.psannikov.jpql.models.Genre;
-import ru.otus.spring.psannikov.jpql.services.BookService;
 import ru.otus.spring.psannikov.jpql.services.CommentService;
 
 import java.util.List;
@@ -36,7 +34,7 @@ public class CommentCommandsTest {
     @MockBean
     CommentConverter commentConverter;
 
-    private final static long ID = 1l;
+    private final static long ID = 1L;
     private final static String TITLE = "Title_1";
     private final static String AUTHOR = "Author_1";
     private final static String GENRE = "Genre_1";
@@ -65,7 +63,7 @@ public class CommentCommandsTest {
     public void insertCommentTest() {
         when(commentService.insert(ID, RETURN_STRING)).thenReturn(mockComment);
         when(commentConverter.commentToString(mockComment)).thenReturn(RETURN_STRING);
-        var actualComment = commentCommands.insertComment(ID,RETURN_STRING);
+        var actualComment = commentCommands.insertComment(ID, RETURN_STRING);
         assertEquals(RETURN_STRING, actualComment);
     }
 

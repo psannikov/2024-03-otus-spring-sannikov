@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.context.annotation.Import;
-import org.springframework.transaction.annotation.Transactional;
 import ru.otus.spring.psannikov.jpql.models.Book;
 import ru.otus.spring.psannikov.jpql.models.Comment;
 
@@ -30,7 +29,6 @@ public class JpaCommentRepositoryTest {
 
     @DisplayName("должен загружать комментарий по id")
     @Test
-    @Transactional(readOnly = true)
     void shouldReturnCorrectCommentById() {
         var actualComment = commentRepository.findById(FIRST_COMMENT_ID);
         var expectedComment = entityManager.find(Comment.class, FIRST_COMMENT_ID);
@@ -41,19 +39,17 @@ public class JpaCommentRepositoryTest {
 
     @DisplayName("должен сохранять новый комментарий")
     @Test
-    @Transactional
     void shouldSaveNewComment() {
         var actualComment = commentRepository.save(new Comment(0L,
                 entityManager.find(Book.class, FIRST_BOOK_ID),
                 "Comment_100500"));
         entityManager.clear();
         var expectedComment = entityManager.find(Comment.class, actualComment.getId());
-        assertThat(expectedComment).isEqualTo(expectedComment);
+        assertThat(actualComment).isEqualTo(expectedComment);
     }
 
     @DisplayName("должен сохранять измененный комментарий")
     @Test
-    @Transactional
     void shouldSaveUpdatedComment() {
         var actualComment = entityManager.find(Comment.class, FIRST_COMMENT_ID);
         actualComment.setFullComment("Comment_+100500+");
@@ -65,16 +61,13 @@ public class JpaCommentRepositoryTest {
 
     @DisplayName("должен удалять комментарий по id ")
     @Test
-    @Transactional
     void shouldDeleteComment() {
-        commentRepository.deleteById(FIRST_BOOK_ID);
-        entityManager.clear();
-        assertThat(entityManager.find(Comment.class, FIRST_BOOK_ID), nullValue());
+        commentRepository.deleteById(FIRST_COMMENT_ID);
+        assertThat(entityManager.find(Comment.class, FIRST_COMMENT_ID), nullValue());
     }
 
     @DisplayName("должен находить все комментарии по id книги")
     @Test
-    @Transactional
     void shouldFindAllCommentByBookId() {
         var actualCommentsByBookID = commentRepository.findAllByBookId(FIRST_BOOK_ID);
         var expectedCommentsByBookID = entityManager

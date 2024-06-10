@@ -17,12 +17,12 @@ public class AuthorConverterTest {
     @Autowired
     private AuthorConverter authorConverter;
 
-    private static final long ID = 1l;
+    private static final long ID = 1L;
     private static final String AUTHOR = "Author_1";
     private static final String EXPECTED_AUTHOR_STRING = "Id: 1, FullName: Author_1";
 
 
-    @DisplayName("должен вывести информацию о авторе")
+    @DisplayName("вывести информацию о авторе")
     @Test
     void shouldReturnCorrectAuthorInfo() {
         var actualAuthor = authorConverter.authorToString(new Author(ID, AUTHOR));

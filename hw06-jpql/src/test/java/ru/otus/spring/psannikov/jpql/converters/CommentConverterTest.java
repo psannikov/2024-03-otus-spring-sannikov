@@ -26,7 +26,7 @@ public class CommentConverterTest {
     @MockBean
     private BookConverter bookConverter;
 
-    private static final long ID = 1l;
+    private static final long ID = 1L;
     private static final String TITLE = "Title_1";
     private static final String AUTHOR = "Author_1";
     private static final String GENRE = "Genre_1";
@@ -37,7 +37,7 @@ public class CommentConverterTest {
     private static final String COMMENT_STRING = "Id: 1, FullComment: Comment 1, Book: {This is Book}";
 
 
-    @DisplayName("должен вывести информацию о комментарие")
+    @DisplayName("вывести информацию о комментарии")
     @Test
     void commentToStringTest() {
         when(bookConverter.bookToString(any())).thenReturn(BOOK_STRING);

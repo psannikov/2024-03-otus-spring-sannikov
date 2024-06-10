@@ -8,14 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
-import ru.otus.spring.psannikov.jpql.models.Author;
 import ru.otus.spring.psannikov.jpql.models.Book;
 import ru.otus.spring.psannikov.jpql.models.Comment;
-import ru.otus.spring.psannikov.jpql.models.Genre;
-import ru.otus.spring.psannikov.jpql.repositories.AuthorRepository;
 import ru.otus.spring.psannikov.jpql.repositories.BookRepository;
 import ru.otus.spring.psannikov.jpql.repositories.CommentRepository;
-import ru.otus.spring.psannikov.jpql.repositories.GenreRepository;
 
 import java.util.Optional;
 
@@ -37,7 +33,7 @@ public class CommentServiceImplTest {
     @MockBean
     private BookRepository bookRepository;
 
-    private final static long ID = 1l;
+    private final static long ID = 1L;
     private final static String FULL_COMMENT = "Comment_1";
     private Comment mockComment;
     private Book mockBook;

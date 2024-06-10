@@ -4,7 +4,6 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
 import org.springframework.stereotype.Component;
-import ru.otus.spring.psannikov.jpql.models.Author;
 import ru.otus.spring.psannikov.jpql.models.Book;
 
 import java.util.List;
@@ -23,12 +22,6 @@ public class JpaBookRepository implements BookRepository {
     @Override
     public Optional<Book> findById(long id) {
         return Optional.ofNullable(em.find(Book.class, id));
-//        TypedQuery<Book> query = em.createQuery("select b from Book b " +
-//                "left join fetch b.author " +
-//                "left join fetch b.genre " +
-//                "where b.id = :id", Book.class);
-//        query.setParameter("id", id);
-//        return Optional.of(query.getSingleResult());
     }
 
     @Override

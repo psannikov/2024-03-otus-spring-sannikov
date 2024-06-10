@@ -6,9 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
-import ru.otus.spring.psannikov.jpql.models.Author;
 import ru.otus.spring.psannikov.jpql.models.Genre;
-import ru.otus.spring.psannikov.jpql.repositories.AuthorRepository;
 import ru.otus.spring.psannikov.jpql.repositories.GenreRepository;
 
 import java.util.List;
@@ -30,7 +28,7 @@ public class GenreServiceImplTest {
     @DisplayName("должен загружать все жанры")
     @Test
     public void findAllTest() {
-        var genresMock = List.of(new Genre(1l, "Genre_1"));
+        var genresMock = List.of(new Genre(1L, "Genre_1"));
         when(genreRepository.findAll()).thenReturn(genresMock);
         var actualGenres = genreService.findAll();
         assertThat(actualGenres).isEqualTo(genresMock);

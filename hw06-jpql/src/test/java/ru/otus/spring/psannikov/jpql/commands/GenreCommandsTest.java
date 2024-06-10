@@ -6,11 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
-import ru.otus.spring.psannikov.jpql.converters.AuthorConverter;
 import ru.otus.spring.psannikov.jpql.converters.GenreConverter;
-import ru.otus.spring.psannikov.jpql.models.Author;
 import ru.otus.spring.psannikov.jpql.models.Genre;
-import ru.otus.spring.psannikov.jpql.services.AuthorService;
 import ru.otus.spring.psannikov.jpql.services.GenreService;
 
 import java.util.List;
@@ -32,7 +29,7 @@ public class GenreCommandsTest {
     @MockBean
     GenreConverter genreConverter;
 
-    private final static long ID = 1l;
+    private final static long ID = 1L;
     private final static String GENRE = "Genre_1";
     private final static String RETURN_STRING = "Id: 1, Name: Author_1";
 

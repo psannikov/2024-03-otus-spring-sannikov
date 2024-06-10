@@ -2,7 +2,6 @@ package ru.otus.spring.psannikov.jpql.repositories;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
 import org.springframework.stereotype.Component;
 import ru.otus.spring.psannikov.jpql.models.Comment;
@@ -42,11 +41,8 @@ public class JpaCommentRepository implements CommentRepository {
 
     @Override
     public void deleteById(long id) {
-        Query query = em.createQuery("delete " +
-                "from Comment c " +
-                "where c.id = :id");
-        query.setParameter("id", id);
-        query.executeUpdate();
+        var comment = findById(id).get();
+        em.remove(comment);
     }
 
     @Override

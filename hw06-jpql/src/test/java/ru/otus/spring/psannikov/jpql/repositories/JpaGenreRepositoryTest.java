@@ -6,8 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.context.annotation.Import;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 import ru.otus.spring.psannikov.jpql.models.Genre;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -15,7 +13,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 @DisplayName("Репозиторий для Genre должен")
 @DataJpaTest
 @Import(JpaGenreRepository.class)
-@Transactional(propagation = Propagation.NEVER)
 public class JpaGenreRepositoryTest {
     @Autowired
     private JpaGenreRepository genreRepository;
@@ -24,9 +21,8 @@ public class JpaGenreRepositoryTest {
 
     private static final long FIRST_GENRE_ID = 1L;
 
-    @DisplayName("должен загружать жанр по id")
+    @DisplayName("загружать жанр по id")
     @Test
-    @Transactional(readOnly = true)
     void shouldReturnCorrectGenreById() {
         var actualGenre = genreRepository.findById(FIRST_GENRE_ID);
         var expectedGenre = entityManager.find(Genre.class, FIRST_GENRE_ID);
@@ -37,7 +33,6 @@ public class JpaGenreRepositoryTest {
 
     @DisplayName("возвращать список всех жанров")
     @Test
-    @Transactional(readOnly = true)
     void shouldFindAllGenres() {
         var actualGenres = genreRepository.findAll();
         var expectedGenre = entityManager
