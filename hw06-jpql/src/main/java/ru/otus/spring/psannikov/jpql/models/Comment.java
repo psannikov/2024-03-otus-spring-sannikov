@@ -19,9 +19,9 @@ public class Comment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @ManyToOne(targetEntity = Book.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "book_id")
-    private Book book;
+//    @ManyToOne(targetEntity = Book.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+//    @JoinColumn(name = "book_id")
+//    private Book book;
 
     @Column(name = "full_comment")
     private String fullComment;
@@ -40,6 +40,6 @@ public class Comment {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, book, fullComment);
+        return Objects.hash(id, fullComment);
     }
 }

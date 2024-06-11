@@ -58,7 +58,8 @@ public class JpaBookRepositoryTest {
         var actualBook = bookRepository.save(new Book(0L,
                 "BookTitle_10500",
                 entityManager.find(Author.class, FIRST_AUTHOR_ID),
-                entityManager.find(Genre.class, FIRST_GENRE_ID)));
+                entityManager.find(Genre.class, FIRST_GENRE_ID),
+                null));
         var expectedBook = entityManager.find(Book.class, actualBook.getId());
         assertThat(actualBook).isEqualTo(expectedBook);
     }

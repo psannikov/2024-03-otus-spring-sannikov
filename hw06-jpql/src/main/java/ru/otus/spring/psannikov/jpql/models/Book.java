@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 
@@ -32,6 +34,10 @@ public class Book {
     @JoinColumn(name = "genre_id")
     private Genre genre;
 
+    @OneToMany(targetEntity = Comment.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "book_id")
+    private List<Comment> comments;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -46,6 +52,6 @@ public class Book {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, title, author, genre);
+        return Objects.hash(id);
     }
 }

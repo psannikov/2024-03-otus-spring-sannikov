@@ -41,7 +41,6 @@ public class JpaCommentRepositoryTest {
     @Test
     void shouldSaveNewComment() {
         var actualComment = commentRepository.save(new Comment(0L,
-                entityManager.find(Book.class, FIRST_BOOK_ID),
                 "Comment_100500"));
         entityManager.clear();
         var expectedComment = entityManager.find(Comment.class, actualComment.getId());
@@ -53,7 +52,6 @@ public class JpaCommentRepositoryTest {
     void shouldSaveUpdatedComment() {
         var actualComment = entityManager.find(Comment.class, FIRST_COMMENT_ID);
         actualComment.setFullComment("Comment_+100500+");
-        actualComment.setBook(entityManager.find(Book.class, SECOND_BOOK_ID));
         commentRepository.save(actualComment);
         var expectedBook = entityManager.find(Comment.class, FIRST_BOOK_ID);
         assertThat(actualComment).isEqualTo(expectedBook);
@@ -64,19 +62,5 @@ public class JpaCommentRepositoryTest {
     void shouldDeleteComment() {
         commentRepository.deleteById(FIRST_COMMENT_ID);
         assertThat(entityManager.find(Comment.class, FIRST_COMMENT_ID), nullValue());
-    }
-
-    @DisplayName("должен находить все комментарии по id книги")
-    @Test
-    void shouldFindAllCommentByBookId() {
-        var actualCommentsByBookID = commentRepository.findAllByBookId(FIRST_BOOK_ID);
-        var expectedCommentsByBookID = entityManager
-                .getEntityManager()
-                .createQuery("select c from Comment c " +
-                        "left join c.book b " +
-                        "where b.id = :id")
-                .setParameter("id", FIRST_BOOK_ID)
-                .getResultList();
-        assertThat(actualCommentsByBookID).containsExactlyElementsOf(expectedCommentsByBookID);
     }
 }

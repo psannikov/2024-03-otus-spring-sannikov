@@ -4,6 +4,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
 import org.springframework.stereotype.Component;
+import ru.otus.spring.psannikov.jpql.models.Book;
 import ru.otus.spring.psannikov.jpql.models.Comment;
 
 import java.util.List;
@@ -20,14 +21,7 @@ public class JpaCommentRepository implements CommentRepository {
     }
 
     @Override
-    public Optional<Comment> findById(long id) {
-        TypedQuery<Comment> query = em.createQuery("select distinct c from Comment c " +
-                "LEFT JOIN FETCH c.book b " +
-                "LEFT JOIN FETCH b.author " +
-                "LEFT JOIN FETCH b.genre " +
-                "where c.id = :id", Comment.class);
-        query.setParameter("id", id);
-        return Optional.of(query.getSingleResult());
+    public Optional<Comment> findById(long id) {return Optional.ofNullable(em.find(Comment.class, id));
     }
 
     @Override
@@ -47,10 +41,7 @@ public class JpaCommentRepository implements CommentRepository {
 
     @Override
     public List<Comment> findAllByBookId(long id) {
-        TypedQuery<Comment> query = em.createQuery("select distinct c from Comment c " +
-                "LEFT JOIN FETCH c.book b " +
-                "LEFT JOIN FETCH b.author " +
-                "LEFT JOIN FETCH b.genre " +
+        TypedQuery<Comment> query = em.createQuery("select b.comments from Book b " +
                 "where b.id = :id", Comment.class);
         query.setParameter("id", id);
         return query.getResultList();

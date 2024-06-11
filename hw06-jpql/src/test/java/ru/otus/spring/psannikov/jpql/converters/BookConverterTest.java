@@ -32,7 +32,7 @@ public class BookConverterTest {
     private static final String TITLE = "Title_1";
     private static final String AUTHOR = "Author_1";
     private static final String GENRE = "Genre_1";
-    private static final Book BOOK = new Book(ID, TITLE, new Author(ID, AUTHOR), new Genre(ID, GENRE));
+    private static final Book BOOK = new Book(ID, TITLE, new Author(ID, AUTHOR), new Genre(ID, GENRE), null);
     private static final String EXPECTED_AUTHOR_STRING = "Id: 1, title: Title_1, author: {Author_1}, genres: [Genre_1]";
 
 

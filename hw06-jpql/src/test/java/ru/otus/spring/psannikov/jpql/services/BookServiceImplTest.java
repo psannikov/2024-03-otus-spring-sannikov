@@ -51,7 +51,7 @@ public class BookServiceImplTest {
     public void setUp() {
         mockAuthor = new Author(ID, AUTHOR);
         mockGenre = new Genre(ID, GENRE);
-        mockBook = new Book(ID, TITLE,mockAuthor,mockGenre);
+        mockBook = new Book(ID, TITLE,mockAuthor,mockGenre, null);
     }
 
 

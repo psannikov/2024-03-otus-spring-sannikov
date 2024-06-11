@@ -44,7 +44,8 @@ public class BookCommandsTest {
     public void setUp() {
         mockBook = new Book(ID, "Title_1",
                 new Author(ID, "Author_1"),
-                new Genre(ID, "Genre_1"));
+                new Genre(ID, "Genre_1"),
+                null);
     }
 
     @DisplayName("выводить информацию о всех книгах")

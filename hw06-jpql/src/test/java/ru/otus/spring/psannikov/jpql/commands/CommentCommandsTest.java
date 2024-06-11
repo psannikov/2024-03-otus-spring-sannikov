@@ -44,9 +44,7 @@ public class CommentCommandsTest {
 
     @BeforeEach
     public void setUp() {
-        mockComment = new Comment(ID,
-                new Book(ID, TITLE, new Author(ID, AUTHOR), new Genre(ID, GENRE)),
-                RETURN_STRING);
+        mockComment = new Comment(ID,RETURN_STRING);
     }
 
     @DisplayName("выводить информацию о коментарии по Id")

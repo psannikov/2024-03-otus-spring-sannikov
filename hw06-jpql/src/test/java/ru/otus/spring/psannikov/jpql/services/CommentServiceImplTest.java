@@ -42,7 +42,7 @@ public class CommentServiceImplTest {
     @BeforeEach
     public void setUp() {
         mockBook = Mockito.mock(Book.class);
-        mockComment = new Comment(ID, mockBook, FULL_COMMENT);
+        mockComment = new Comment(ID, FULL_COMMENT);
     }
 
 
