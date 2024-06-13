@@ -28,7 +28,7 @@ public class AuthorServiceImplTest {
     @DisplayName("должен загружать всех авторов")
     @Test
     public void findAllTest() {
-        var authorsMock = List.of(new Author(1l, "Author_1"));
+        var authorsMock = List.of(new Author(1L, "Author_1"));
         when(authorRepository.findAll()).thenReturn(authorsMock);
         var authors = authorService.findAll();
         assertThat(authors).isEqualTo(authorsMock);

@@ -8,10 +8,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
 import ru.otus.spring.psannikov.data.jpa.converters.CommentConverter;
-import ru.otus.spring.psannikov.data.jpa.models.Author;
-import ru.otus.spring.psannikov.data.jpa.models.Book;
 import ru.otus.spring.psannikov.data.jpa.models.Comment;
-import ru.otus.spring.psannikov.data.jpa.models.Genre;
 import ru.otus.spring.psannikov.data.jpa.services.CommentService;
 
 import java.util.List;
@@ -35,16 +32,13 @@ public class CommentCommandsTest {
     CommentConverter commentConverter;
 
     private final static long ID = 1L;
-    private final static String TITLE = "Title_1";
-    private final static String AUTHOR = "Author_1";
-    private final static String GENRE = "Genre_1";
     private final static String RETURN_STRING = "Тестовый комментарий";
 
     private Comment mockComment;
 
     @BeforeEach
     public void setUp() {
-        mockComment = new Comment(ID,RETURN_STRING);
+        mockComment = new Comment(ID, RETURN_STRING);
     }
 
     @DisplayName("выводить информацию о коментарии по Id")

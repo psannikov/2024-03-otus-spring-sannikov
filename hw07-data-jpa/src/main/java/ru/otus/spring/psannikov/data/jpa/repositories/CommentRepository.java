@@ -1,6 +1,5 @@
 package ru.otus.spring.psannikov.data.jpa.repositories;
 
-import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -11,7 +10,6 @@ import java.util.Optional;
 
 public interface CommentRepository extends JpaRepository<Comment, Long> {
 
-//    @EntityGraph(attributePaths = {"book", "book.author", "book.genre"})
     Optional<Comment> findById(long id);
 
     @Modifying
@@ -20,7 +18,6 @@ public interface CommentRepository extends JpaRepository<Comment, Long> {
     @Modifying
     void deleteById(long id);
 
-//    @EntityGraph(attributePaths = {"book", "book.author", "book.genre"})
     @Query("select b.comments from Book b where b.id = :id")
     List<Comment> findAllByBookId(long id);
 }

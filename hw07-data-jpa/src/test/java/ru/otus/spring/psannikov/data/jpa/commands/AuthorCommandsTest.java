@@ -29,7 +29,7 @@ public class AuthorCommandsTest {
     @MockBean
     AuthorConverter authorConverter;
 
-    private final static long ID = 1l;
+    private final static long ID = 1L;
     private final static String AUTHOR = "Author_1";
     private final static String RETURN_STRING = "Id: 1, FullName: Author_1";
 
