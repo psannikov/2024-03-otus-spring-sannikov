@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
 import java.util.Objects;
 
 
@@ -19,6 +20,8 @@ import java.util.Objects;
         attributeNodes = {@NamedAttributeNode("author")})
 @NamedEntityGraph(name = "books-genres-entity-graph",
         attributeNodes = {@NamedAttributeNode("genre")})
+@NamedEntityGraph(name = "books-comment-entity-graph",
+        attributeNodes = {@NamedAttributeNode("comments")})
 public class Book {
 
     @Id
@@ -36,6 +39,10 @@ public class Book {
     @JoinColumn(name = "genre_id")
     private Genre genre;
 
+    @OneToMany(targetEntity = Comment.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "book_id")
+    private List<Comment> comments;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -45,14 +52,11 @@ public class Book {
             return false;
         }
         Book book = (Book) o;
-        return id == book.id
-                && Objects.equals(title, book.title)
-                && Objects.equals(author, book.author)
-                && Objects.equals(genre, book.genre);
+        return id == book.id;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, title, author, genre);
+        return Objects.hash(id);
     }
 }

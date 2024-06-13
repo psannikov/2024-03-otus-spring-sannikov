@@ -8,12 +8,9 @@ import ru.otus.spring.psannikov.data.jpa.models.Comment;
 @Component
 public class CommentConverter {
 
-    private final BookConverter bookConverter;
-
     public String commentToString(Comment comment) {
-        return "Id: %d, FullComment: %s, Book: {%s}"
+        return "Id: %d, FullComment: %s"
                 .formatted(comment.getId(),
-                        comment.getFullComment(),
-                        bookConverter.bookToString(comment.getBook()));
+                        comment.getFullComment());
     }
 }
