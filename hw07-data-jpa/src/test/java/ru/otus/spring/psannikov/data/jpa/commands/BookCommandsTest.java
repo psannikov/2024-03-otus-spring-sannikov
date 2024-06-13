@@ -34,7 +34,7 @@ public class BookCommandsTest {
     @MockBean
     BookConverter bookConverter;
 
-    private final static long ID = 1l;
+    private final static long ID = 1L;
     private final static String TITLE = "Title_1";
     private final static String RETURN_STRING = "Тестовая книга";
 
