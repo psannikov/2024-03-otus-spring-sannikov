@@ -58,6 +58,7 @@
         <module>cw11-jpql/jpql-class-work/jpql-solution-05</module>
         <module>cw11-jpql/jpql-class-work/jpql-solution-06</module>
         <module>cw11-jpql/jpql-class-work/jpql-solution-final</module>
+        <module>hw06-jpql</module>
         <module>cw13-data-jpa</module>
         <module>cw13-data-jpa/demo</module>
         <module>cw13-data-jpa/cw13-exercise</module>
@@ -66,6 +67,18 @@
         <module>cw13-data-jpa/solution-03</module>
         <module>cw13-data-jpa/solution-04</module>
         <module>hw07-data-jpa</module>
+        <module>cw15-data-nosql</module>
+        <module>cw15-data-nosql/spring-data-keyvalue-class-work</module>
+        <module>cw15-data-nosql/spring-data-keyvalue-class-work/spring-data-keyvalue-exercise</module>
+        <module>cw15-data-nosql/spring-data-keyvalue-class-work/spring-data-keyvalue-solution</module>
+        <module>cw15-data-nosql/spring-data-mongo-class-work</module>
+        <module>cw15-data-nosql/spring-data-mongo-class-work/spring-data-mongo-exercise</module>
+        <module>cw15-data-nosql/spring-data-mongo-class-work/spring-data-mongo-solution</module>
+        <module>cw17-mvc</module>
+        <module>cw17-mvc/spring-mvc-demo</module>
+        <module>cw17-mvc/spring-mvc-exercise</module>
+        <module>cw17-mvc/spring-mvc-solution-1</module>
+        <module>cw17-mvc/spring-mvc-solution-2</module>
     </modules>
 
     <properties>
