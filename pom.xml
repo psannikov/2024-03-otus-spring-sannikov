@@ -73,6 +73,11 @@
         <module>cw15-data-nosql/spring-data-mongo-class-work</module>
         <module>cw15-data-nosql/spring-data-mongo-class-work/spring-data-mongo-exercise</module>
         <module>cw15-data-nosql/spring-data-mongo-class-work/spring-data-mongo-solution</module>
+        <module>cw17-mvc</module>
+        <module>cw17-mvc/spring-mvc-demo</module>
+        <module>cw17-mvc/spring-mvc-exercise</module>
+        <module>cw17-mvc/spring-mvc-solution-1</module>
+        <module>cw17-mvc/spring-mvc-solution-2</module>
     </modules>
 
     <properties>
