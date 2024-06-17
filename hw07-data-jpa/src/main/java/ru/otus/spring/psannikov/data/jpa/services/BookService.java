@@ -1,6 +1,7 @@
 package ru.otus.spring.psannikov.data.jpa.services;
 
 import ru.otus.spring.psannikov.data.jpa.models.Book;
+import ru.otus.spring.psannikov.data.jpa.models.Comment;
 
 import java.util.List;
 import java.util.Optional;

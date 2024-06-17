@@ -4,8 +4,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 import ru.otus.spring.psannikov.data.jpa.converters.BookConverter;
+import ru.otus.spring.psannikov.data.jpa.models.Comment;
 import ru.otus.spring.psannikov.data.jpa.services.BookService;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 @SuppressWarnings({"SpellCheckingInspection", "unused"})

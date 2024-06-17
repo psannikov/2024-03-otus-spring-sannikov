@@ -19,7 +19,7 @@ public class CommentServiceImpl implements CommentService {
 
     private final BookRepository bookRepository;
 
-    @Transactional(readOnly = true)
+//    @Transactional(readOnly = true)
     @Override
     public Optional<Comment> findById(long id) {
         return commentRepository.findById(id);
@@ -37,16 +37,14 @@ public class CommentServiceImpl implements CommentService {
         return save(id, bookId, fullComment);
     }
 
-    @Transactional
     @Override
     public void deleteById(long id) {
         commentRepository.deleteById(id);
     }
 
-    @Transactional(readOnly = true)
     @Override
     public List<Comment> findAllByBookId(long id) {
-        return commentRepository.findAllByBookId(id);
+        return bookRepository.findById(id).get().getComments();
     }
 
     private Comment save(long id, long bookId, String fullComment) {

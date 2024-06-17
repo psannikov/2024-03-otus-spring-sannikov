@@ -12,12 +12,8 @@ public interface CommentRepository extends JpaRepository<Comment, Long> {
 
     Optional<Comment> findById(long id);
 
-    @Modifying
     Comment save(Comment comment);
 
-    @Modifying
     void deleteById(long id);
 
-    @Query("select b.comments from Book b where b.id = :id")
-    List<Comment> findAllByBookId(long id);
 }

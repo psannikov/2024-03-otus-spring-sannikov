@@ -5,10 +5,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.otus.spring.psannikov.data.jpa.exceptions.EntityNotFoundException;
 import ru.otus.spring.psannikov.data.jpa.models.Book;
+import ru.otus.spring.psannikov.data.jpa.models.Comment;
 import ru.otus.spring.psannikov.data.jpa.repositories.AuthorRepository;
 import ru.otus.spring.psannikov.data.jpa.repositories.BookRepository;
 import ru.otus.spring.psannikov.data.jpa.repositories.GenreRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,13 +23,13 @@ public class BookServiceImpl implements BookService {
 
     private final BookRepository bookRepository;
 
-    @Transactional(readOnly = true)
+//    @Transactional(readOnly = true)
     @Override
     public Optional<Book> findById(long id) {
         return bookRepository.findById(id);
     }
 
-    @Transactional(readOnly = true)
+//    @Transactional(readOnly = true)
     @Override
     public List<Book> findAll() {
         return bookRepository.findAll();
@@ -45,7 +47,7 @@ public class BookServiceImpl implements BookService {
         return save(id, title, authorId, genreId);
     }
 
-    @Transactional
+//    @Transactional
     @Override
     public void deleteById(long id) {
         bookRepository.deleteById(id);
@@ -56,7 +58,7 @@ public class BookServiceImpl implements BookService {
                 .orElseThrow(() -> new EntityNotFoundException("Author with id %d not found".formatted(authorId)));
         var genre = genreRepository.findById(genreId)
                 .orElseThrow(() -> new EntityNotFoundException("Genre with id %d not found".formatted(genreId)));
-        var book = new Book(id, title, author, genre, null);
+        var book = new Book(id, title, author, genre, new ArrayList<>());
         return bookRepository.save(book);
     }
 }

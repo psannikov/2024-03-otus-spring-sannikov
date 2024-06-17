@@ -21,8 +21,10 @@ public class BookConverter {
                 book.getTitle(),
                 authorConverter.authorToString(book.getAuthor()),
                 genreConverter.genreToString(book.getGenre()),
-                book.getComments().stream()
-                        .map(commentConverter::commentToString)
-                        .collect(Collectors.joining("," + System.lineSeparator())));
+                book.getComments().isEmpty() ? null :
+                        book.getComments()
+                                .stream()
+                                .map(commentConverter::commentToString)
+                                .collect(Collectors.joining("," + System.lineSeparator())));
     }
 }
