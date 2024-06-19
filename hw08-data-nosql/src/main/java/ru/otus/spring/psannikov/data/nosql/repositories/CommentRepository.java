@@ -3,7 +3,6 @@ package ru.otus.spring.psannikov.data.nosql.repositories;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import ru.otus.spring.psannikov.data.nosql.models.Comment;
 
-import java.util.List;
 import java.util.Optional;
 
 public interface CommentRepository extends MongoRepository<Comment, String> {
@@ -14,5 +13,4 @@ public interface CommentRepository extends MongoRepository<Comment, String> {
 
     void deleteById(String id);
 
-    List<Comment> findAllByBookId(String id);
 }

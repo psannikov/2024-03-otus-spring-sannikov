@@ -8,12 +8,9 @@ import ru.otus.spring.psannikov.data.nosql.models.Comment;
 @Component
 public class CommentConverter {
 
-    private final BookConverter bookConverter;
-
     public String commentToString(Comment comment) {
-        return "Id: %s, FullComment: %s, Book: {%s}"
+        return "Id: %s, FullComment: %s"
                 .formatted(comment.getId(),
-                        comment.getFullComment(),
-                        bookConverter.bookToString(comment.getBook()));
+                        comment.getFullComment());
     }
 }

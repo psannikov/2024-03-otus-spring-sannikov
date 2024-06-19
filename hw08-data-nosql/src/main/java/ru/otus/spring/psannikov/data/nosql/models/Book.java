@@ -8,6 +8,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.List;
 import java.util.Objects;
 
 
@@ -29,10 +30,14 @@ public class Book {
     @DBRef
     private Genre genre;
 
-    public Book(String title, Author author, Genre genre) {
+    @DBRef
+    private List<Comment> comments;
+
+    public Book(String title, Author author, Genre genre, List<Comment> comments) {
         this.title = title;
         this.author = author;
         this.genre = genre;
+        this.comments = comments;
     }
 
     @Override

@@ -46,13 +46,18 @@ public class CommentServiceImpl implements CommentService {
     @Transactional(readOnly = true)
     @Override
     public List<Comment> findAllByBookId(String id) {
-        return commentRepository.findAllByBookId(id);
+        return bookRepository.findById(id).get().getComments();
     }
 
     private Comment save(String id, String bookId, String fullComment) {
         var book = bookRepository.findById(bookId)
-                .orElseThrow(() -> new EntityNotFoundException("Book with id %d not found".formatted(bookId)));
-        var comment = new Comment(id, book, fullComment);
-        return commentRepository.save(comment);
+                .orElseThrow(() -> new EntityNotFoundException("Book with id %s not found".formatted(bookId)));
+
+        var comment = commentRepository.save(new Comment(id, fullComment));
+        if (id == null) {
+            book.getComments().add(comment);
+        }
+        bookRepository.save(book);
+        return comment;
     }
 }

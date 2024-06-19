@@ -4,6 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import ru.otus.spring.psannikov.data.nosql.models.Book;
 
+import java.util.stream.Collectors;
+
 @RequiredArgsConstructor
 @Component
 public class BookConverter {
@@ -11,11 +13,18 @@ public class BookConverter {
 
     private final GenreConverter genreConverter;
 
+    private final CommentConverter commentConverter;
+
     public String bookToString(Book book) {
-        return "Id: %s, title: %s, author: {%s}, genres: [%s]".formatted(
+        return "\nId: %s, title: %s, \nauthor: {%s}, \ngenres: [%s], \ncomments: [%s]".formatted(
                 book.getId(),
                 book.getTitle(),
                 authorConverter.authorToString(book.getAuthor()),
-                genreConverter.genreToString(book.getGenre()));
+                genreConverter.genreToString(book.getGenre()),
+                book.getComments().isEmpty() ? null :
+                        book.getComments()
+                                .stream()
+                                .map(commentConverter::commentToString)
+                                .collect(Collectors.joining("," + System.lineSeparator())));
     }
 }

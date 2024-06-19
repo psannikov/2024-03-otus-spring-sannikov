@@ -7,8 +7,10 @@ import ru.otus.spring.psannikov.data.nosql.exceptions.EntityNotFoundException;
 import ru.otus.spring.psannikov.data.nosql.models.Book;
 import ru.otus.spring.psannikov.data.nosql.repositories.AuthorRepository;
 import ru.otus.spring.psannikov.data.nosql.repositories.BookRepository;
+import ru.otus.spring.psannikov.data.nosql.repositories.CommentRepository;
 import ru.otus.spring.psannikov.data.nosql.repositories.GenreRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,6 +22,8 @@ public class BookServiceImpl implements BookService {
     private final GenreRepository genreRepository;
 
     private final BookRepository bookRepository;
+
+//    private final CommentRepository commentRepository;
 
     @Transactional(readOnly = true)
     @Override
@@ -53,10 +57,10 @@ public class BookServiceImpl implements BookService {
 
     private Book save(String id, String title, String authorId, String genreId) {
         var author = authorRepository.findById(authorId)
-                .orElseThrow(() -> new EntityNotFoundException("Author with id %d not found".formatted(authorId)));
+                .orElseThrow(() -> new EntityNotFoundException("Author with id %s not found".formatted(authorId)));
         var genre = genreRepository.findById(genreId)
-                .orElseThrow(() -> new EntityNotFoundException("Genre with id %d not found".formatted(genreId)));
-        var book = new Book(id, title, author, genre);
+                .orElseThrow(() -> new EntityNotFoundException("Genre with id %s not found".formatted(genreId)));
+        var book = new Book(id, title, author, genre, new ArrayList<>());
         return bookRepository.save(book);
     }
 }

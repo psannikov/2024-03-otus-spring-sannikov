@@ -12,6 +12,9 @@ import ru.otus.spring.psannikov.data.nosql.repositories.BookRepository;
 import ru.otus.spring.psannikov.data.nosql.repositories.CommentRepository;
 import ru.otus.spring.psannikov.data.nosql.repositories.GenreRepository;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @ChangeLog(order = "001")
 public class DatabaseInit {
 
@@ -23,9 +26,11 @@ public class DatabaseInit {
 
     private Genre genre2;
 
-    private Book book1;
+    private Comment comment1;
 
-    private Book book2;
+    private Comment comment2;
+
+    private Comment comment3;
 
     @ChangeSet(order = "001", id = "dropDb", author = "psannikov", runAlways = true)
     public void dropDb(MongoDatabase db) {
@@ -46,17 +51,19 @@ public class DatabaseInit {
         repository.save(new Genre("Genre_3"));
     }
 
-    @ChangeSet(order = "004", id = "insertBook", author = "psannikov")
-    public void insertBooks (BookRepository repository) {
-        book1 = repository.save(new Book("BookTitle_1", author1, genre1));
-        book2 = repository.save(new Book("BookTitle_2", author2, genre2));
-        repository.save(new Book("BookTitle_3", author1, genre2));
+    @ChangeSet(order = "004", id = "insertComment", author = "psannikov")
+    public void insertComments (CommentRepository repository) {
+        comment1 = repository.save(new Comment("Book1_Comment1"));
+        comment2 = repository.save(new Comment("Book1_Comment2"));
+        comment3 = repository.save(new Comment("Book1_Comment3"));
     }
 
-    @ChangeSet(order = "005", id = "insertComment", author = "psannikov")
-    public void insertComments (CommentRepository repository) {
-        repository.save(new Comment(book1, "Book1_Comment1"));
-        repository.save(new Comment(book1, "Book1_Comment2"));
-        repository.save(new Comment(book2, "Book1_Comment3"));
+    @ChangeSet(order = "005", id = "insertBook", author = "psannikov")
+    public void insertBooks (BookRepository repository) {
+        repository.save(new Book("BookTitle_1", author1, genre1, List.of(comment1, comment2)));
+        repository.save(new Book("BookTitle_2", author2, genre2,List.of(comment3)));
+        repository.save(new Book("BookTitle_3", author1, genre2, new ArrayList<>()));
     }
+
+
 }
