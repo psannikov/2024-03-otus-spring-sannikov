@@ -24,7 +24,7 @@ public class GenreCommands {
     }
 
     @ShellMethod(value = "Delete genre by id", key = "gdel")
-    public void deleteAuthor(String id) {
+    public void deleteGenre(String id) {
         genreService.deleteById(id);
     }
 }
