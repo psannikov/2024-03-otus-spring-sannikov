@@ -1,12 +1,7 @@
 package ru.otus.spring.psannikov.mvc.view.models;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
-import java.util.Objects;
+import lombok.*;
 
 @Setter
 @Getter
@@ -14,6 +9,7 @@ import java.util.Objects;
 @NoArgsConstructor
 @Entity
 @Table(name = "comments")
+@EqualsAndHashCode(of = {"id"})
 public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,22 +17,4 @@ public class Comment {
 
     @Column(name = "full_comment")
     private String fullComment;
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        Comment comment = (Comment) o;
-        return id == comment.id
-                && Objects.equals(fullComment, comment.fullComment);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, fullComment);
-    }
 }

@@ -1,13 +1,9 @@
 package ru.otus.spring.psannikov.mvc.view.models;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
-import java.util.Objects;
 
 
 @Setter
@@ -22,6 +18,7 @@ import java.util.Objects;
         attributeNodes = {@NamedAttributeNode("genre")})
 @NamedEntityGraph(name = "books-comment-entity-graph",
         attributeNodes = {@NamedAttributeNode("comments")})
+@EqualsAndHashCode(of = {"id"})
 public class Book {
 
     @Id
@@ -43,20 +40,4 @@ public class Book {
     @JoinColumn(name = "book_id")
     private List<Comment> comments;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        Book book = (Book) o;
-        return id == book.id;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
 }

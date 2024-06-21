@@ -1,12 +1,7 @@
 package ru.otus.spring.psannikov.mvc.view.models;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
-import java.util.Objects;
+import lombok.*;
 
 @Setter
 @Getter
@@ -14,6 +9,7 @@ import java.util.Objects;
 @NoArgsConstructor
 @Entity
 @Table(name = "genres")
+@EqualsAndHashCode(of = {"id"})
 public class Genre {
 
     @Id
@@ -23,20 +19,4 @@ public class Genre {
     @Column(name = "name", nullable = false, unique = true)
     private String name;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        Genre genre = (Genre) o;
-        return id == genre.id && Objects.equals(name, genre.name);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name);
-    }
 }

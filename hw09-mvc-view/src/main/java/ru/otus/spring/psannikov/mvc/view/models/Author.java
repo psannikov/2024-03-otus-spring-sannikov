@@ -1,18 +1,14 @@
 package ru.otus.spring.psannikov.mvc.view.models;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
-import java.util.Objects;
+import lombok.*;
 
 @Setter
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@EqualsAndHashCode(of = {"id"})
 @Table(name = "authors")
 public class Author {
 
@@ -23,20 +19,4 @@ public class Author {
     @Column(name = "full_name", nullable = false, unique = true)
     private String fullName;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        Author author = (Author) o;
-        return id == author.id && Objects.equals(fullName, author.fullName);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, fullName);
-    }
 }
