@@ -89,6 +89,7 @@
         <module>cw19-mvc-ajax</module>
         <module>cw19-mvc-ajax/spring-ajax-demo</module>
         <module>cw19-mvc-ajax/spring-boot-and-react-demo</module>
+        <module>hw10-mvc-ajax</module>
     </modules>
 
     <properties>
