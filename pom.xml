@@ -86,6 +86,9 @@
         <module>cw18-mvc-view/spring-mvc-view-solution2</module>
         <module>cw18-mvc-view/spring-mvc-view-solution3</module>
         <module>cw18-mvc-view/spring-mvc-view-solution4</module>
+        <module>cw19-mvc-ajax</module>
+        <module>cw19-mvc-ajax/spring-ajax-demo</module>
+        <module>cw19-mvc-ajax/spring-boot-and-react-demo</module>
     </modules>
 
     <properties>
