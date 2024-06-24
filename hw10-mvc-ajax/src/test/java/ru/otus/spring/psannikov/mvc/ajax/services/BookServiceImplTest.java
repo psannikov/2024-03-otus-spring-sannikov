@@ -52,7 +52,7 @@ public class BookServiceImplTest {
     public void setUp() {
         mockAuthor = new Author(ID, AUTHOR);
         mockGenre = new Genre(ID, GENRE);
-        mockBook = new Book(ID, TITLE,mockAuthor,mockGenre, null);
+        mockBook = new Book(ID, TITLE, mockAuthor, mockGenre, null);
     }
 
 
@@ -93,7 +93,7 @@ public class BookServiceImplTest {
         when(authorRepository.findById(ID)).thenReturn(Optional.of(mockAuthor));
         when(genreRepository.findById(ID)).thenReturn(Optional.of(mockGenre));
         when(bookRepository.save(Mockito.any(Book.class))).thenReturn(mockBook);
-        var book = bookService.update(ID, TITLE, ID, ID,new ArrayList<>());
+        var book = bookService.update(ID, TITLE, ID, ID, new ArrayList<>());
         assertEquals(mockBook, book);
         verify(authorRepository, times(1)).findById(ID);
         verify(genreRepository, times(1)).findById(ID);
