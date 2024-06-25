@@ -66,6 +66,7 @@
         <module>cw13-data-jpa/solution-02</module>
         <module>cw13-data-jpa/solution-03</module>
         <module>cw13-data-jpa/solution-04</module>
+        <module>hw08-data-nosql</module>
         <module>hw07-data-jpa</module>
         <module>cw15-data-nosql</module>
         <module>cw15-data-nosql/spring-data-keyvalue-class-work</module>
