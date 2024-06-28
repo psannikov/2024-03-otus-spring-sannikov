@@ -66,6 +66,7 @@
         <module>cw13-data-jpa/solution-02</module>
         <module>cw13-data-jpa/solution-03</module>
         <module>cw13-data-jpa/solution-04</module>
+        <module>hw08-data-nosql</module>
         <module>hw07-data-jpa</module>
         <module>cw15-data-nosql</module>
         <module>cw15-data-nosql/spring-data-keyvalue-class-work</module>
@@ -86,10 +87,13 @@
         <module>cw18-mvc-view/spring-mvc-view-solution2</module>
         <module>cw18-mvc-view/spring-mvc-view-solution3</module>
         <module>cw18-mvc-view/spring-mvc-view-solution4</module>
+        <module>hw09-mvc-view</module>
         <module>cw19-mvc-ajax</module>
         <module>cw19-mvc-ajax/spring-ajax-demo</module>
         <module>cw19-mvc-ajax/spring-boot-and-react-demo</module>
         <module>hw10-mvc-ajax</module>
+        <module>cw20-reactor</module>
+        <module>cw21-webflux</module>
     </modules>
 
     <properties>
