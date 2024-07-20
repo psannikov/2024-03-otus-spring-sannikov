@@ -93,6 +93,7 @@
         <module>cw19-mvc-ajax/spring-boot-and-react-demo</module>
         <module>cw20-reactor</module>
         <module>cw21-webflux</module>
+        <module>cw23-spring-security-architecure</module>
     </modules>
 
     <properties>
