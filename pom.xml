@@ -95,6 +95,16 @@
         <module>cw20-reactor</module>
         <module>cw21-webflux</module>
         <module>cw23-spring-security-architecure</module>
+        <module>cw24-spring-security-auth</module>
+        <module>cw25-spring-security-authorization</module>
+        <module>cw25-spring-security-authorization/classwork</module>
+        <module>cw25-spring-security-authorization/jwt</module>
+        <module>cw25-spring-security-authorization/solution2</module>
+        <module>cw25-spring-security-authorization/webflux</module>
+        <module>cw26-spring-security-acl</module>
+        <module>cw26-spring-security-acl/acl</module>
+        <module>cw26-spring-security-acl/oauth</module>
+        <module>cw27-spring-batch</module>
     </modules>
 
     <properties>
