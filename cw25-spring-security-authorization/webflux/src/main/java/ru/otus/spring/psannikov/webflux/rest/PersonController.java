@@ -11,7 +11,7 @@ public class PersonController {
 
     private final PersonRepository personRepository;
 
-    public PersonController( PersonRepository personRepository ) {
+    public PersonController(PersonRepository personRepository) {
         this.personRepository = personRepository;
     }
 
@@ -21,14 +21,12 @@ public class PersonController {
     }
 
     @GetMapping("/person/find")
-    public Mono<Person> find( @RequestParam("name") String name ) {
-        return personRepository.findByName( name )
-                .cache();
+    public Mono<Person> find(@RequestParam("name") String name) {
+        return personRepository.findByName(name).cache();
     }
 
-
     @PostMapping("/person")
-    public Mono<Person> savePerson( @RequestBody Person person ) {
+    public Mono<Person> savePerson(@RequestBody Person person) {
         return personRepository.save( person );
     }
 }

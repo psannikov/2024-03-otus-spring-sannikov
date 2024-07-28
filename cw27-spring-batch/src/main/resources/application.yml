@@ -19,7 +19,7 @@ spring:
   data:
     mongodb:
       host: localhost
-      port: 0
+      port: 27017
       database: SpringBatchExampleDB
 
   datasource:
@@ -41,7 +41,7 @@ de:
 mongock:
   runner-type: "InitializingBean"
   change-logs-scan-package:
-    - ru.otus.example.springbatch.chandgelogs
+    - ru.otus.spring.psannikov.springbatch.chandgel
   mongo-db:
     write-concern:
       journal: false

@@ -33,14 +33,15 @@ public class PagesController {
 
     @GetMapping("/manager")
     public String managerPage() {
+        myService.onlyAdmin();
         return "manager";
     }
 
     @GetMapping("/admin")
     //@Secured( "ADMIN" )
     public String adminPage() {
-        myService.onlyUser();
-        //myService.onlyAdmin();
+//        myService.onlyUser();
+        myService.onlyAdmin();
         return "admin";
     }
 

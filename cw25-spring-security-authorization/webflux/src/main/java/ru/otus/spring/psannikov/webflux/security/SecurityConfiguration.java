@@ -21,14 +21,14 @@ import org.springframework.security.web.server.SecurityWebFilterChain;
 public class SecurityConfiguration {
 
     @Bean
-    public SecurityWebFilterChain springWebFilterChain( ServerHttpSecurity http ) {
+    public SecurityWebFilterChain springWebFilterChain(ServerHttpSecurity http) {
         return http
-                .authorizeExchange((exchanges)->exchanges
-                        .pathMatchers( HttpMethod.GET, "/authenticated.html" ).authenticated()
-                        .pathMatchers( "/person" ).hasAnyRole( "USER" )
+                .authorizeExchange((exchanges) -> exchanges
+                        .pathMatchers(HttpMethod.GET, "/authenticated.html").authenticated()
+                        .pathMatchers("/person").hasAnyRole("USER")
                         .anyExchange().denyAll()
                 )
-                .httpBasic( Customizer.withDefaults())
+                .httpBasic(Customizer.withDefaults())
                 .build();
     }
 
@@ -40,10 +40,10 @@ public class SecurityConfiguration {
     @Bean
     public ReactiveUserDetailsService userDetailsService() {
         UserDetails user = User
-                .withUsername( "user" )
-                .password( "password" )
-                .roles( "USER" )
+                .withUsername("user")
+                .password("password")
+                .roles("USER")
                 .build();
-        return new MapReactiveUserDetailsService( user );
+        return new MapReactiveUserDetailsService(user);
     }
 }

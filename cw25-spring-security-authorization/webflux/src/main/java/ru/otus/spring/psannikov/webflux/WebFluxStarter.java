@@ -11,12 +11,12 @@ import org.springframework.web.reactive.function.server.ServerResponse;
 @SpringBootApplication
 public class WebFluxStarter {
 
-    public static void main( String[] args ) {
-        SpringApplication.run( WebFluxStarter.class );
+    public static void main(String[] args) {
+        SpringApplication.run(WebFluxStarter.class);
     }
 
     @Bean
     RouterFunction<ServerResponse> staticResourceRouter() {
-        return RouterFunctions.resources( "/**.html", new ClassPathResource( "static/" ) );
+        return RouterFunctions.resources("/**.html", new ClassPathResource("static/"));
     }
 }

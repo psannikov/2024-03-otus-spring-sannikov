@@ -14,11 +14,11 @@ public class Person {
     public Person() {
     }
 
-    public Person( String name ) {
+    public Person(String name) {
         this.name = name;
     }
 
-    public Person( String id, String name ) {
+    public Person(String id, String name) {
         this.id = id;
         this.name = name;
     }
@@ -27,7 +27,7 @@ public class Person {
         return id;
     }
 
-    public void setId( String id ) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -35,7 +35,7 @@ public class Person {
         return name;
     }
 
-    public void setName( String name ) {
+    public void setName(String name) {
         this.name = name;
     }
 }
