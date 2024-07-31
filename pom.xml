@@ -95,6 +95,9 @@
         <module>cw20-reactor</module>
         <module>cw21-webflux</module>
         <module>cw23-spring-security-architecure</module>
+        <module>cw31-data-rest</module>
+        <module>cw31-data-rest/spring-31-exercise</module>
+        <module>cw31-data-rest/spring-31-solution</module>
     </modules>
 
     <properties>
