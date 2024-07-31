@@ -111,6 +111,9 @@
         <module>cw30-spring-integration-endpoints-flow-components</module>
         <module>cw30-spring-integration-endpoints-flow-components/endpoints-flow-components-exercise</module>
         <module>cw30-spring-integration-endpoints-flow-components/endpoints-flow-components-solution</module>
+        <module>cw31-data-rest</module>
+        <module>cw31-data-rest/spring-31-exercise</module>
+        <module>cw31-data-rest/spring-31-solution</module>
     </modules>
 
     <properties>
