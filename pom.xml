@@ -105,6 +105,12 @@
         <module>cw26-spring-security-acl/acl</module>
         <module>cw26-spring-security-acl/oauth</module>
         <module>cw27-spring-batch</module>
+        <module>cw29-spring-integration-messaging-channels</module>
+        <module>cw29-spring-integration-messaging-channels/integrations-channels-exercise</module>
+        <module>cw29-spring-integration-messaging-channels/integrations-channels-solution</module>
+        <module>cw30-spring-integration-endpoints-flow-components</module>
+        <module>cw30-spring-integration-endpoints-flow-components/endpoints-flow-components-exercise</module>
+        <module>cw30-spring-integration-endpoints-flow-components/endpoints-flow-components-solution</module>
     </modules>
 
     <properties>
