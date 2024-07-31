@@ -114,6 +114,7 @@
         <module>cw31-data-rest</module>
         <module>cw31-data-rest/spring-31-exercise</module>
         <module>cw31-data-rest/spring-31-solution</module>
+        <module>hw16-data-rest</module>
     </modules>
 
     <properties>

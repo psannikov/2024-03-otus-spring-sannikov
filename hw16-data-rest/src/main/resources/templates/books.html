@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>List of all books</title>
+    <style type="text/css">
+        body {
+            padding: 50px;
+        }
+
+        .books {
+            border: 1px solid steelblue;
+            width: 300px;
+            border-collapse: collapse;
+        }
+
+        .books tr td, th {
+            padding: 5px;
+            border: 1px solid steelblue;
+        }
+
+        .books td:last-child, td:first-child {
+            width: 50px;
+        }
+    </style>
+</head>
+<body>
+<h3>Books:</h3>
+
+<table class="books">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Genre</th>
+        <th>Comments</th>
+    </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+<br>
+<form id="add-book-page" action="addBook.html" th:action="@{/create}">
+    <div class="row">
+        <button type="submit">CreateBook</button>
+    </div>
+</form>
+<script type="text/javascript">
+    // Получение списка книг с использованием Fetch API
+    fetch('/api/v1/book')
+        .then(response => response.json())
+        .then(data => {
+            // Получение таблицы и ее тела
+            const table = document.querySelector('table.books');
+            const tbody = table.querySelector('tbody');
+
+            // Добавление данных в таблицу
+            data.forEach(book => {
+                const row = document.createElement('tr');
+
+                const idCell = document.createElement('td');
+                idCell.textContent = book.id;
+                row.appendChild(idCell);
+
+                const titleCell = document.createElement('td');
+                titleCell.textContent = book.title;
+                row.appendChild(titleCell);
+
+                const authorCell = document.createElement('td');
+                authorCell.textContent = book.authorFullName;
+                row.appendChild(authorCell);
+
+                const genreCell = document.createElement('td');
+                genreCell.textContent = book.genreName;
+                row.appendChild(genreCell);
+
+                const commentsCell = document.createElement('td');
+                // commentsCell.textContent = book.comments.fullComment.join('\n');
+                row.appendChild(commentsCell);
+
+                // Создание ячейки со ссылкой редактирования
+                const editCell = document.createElement('td');
+                const editLink = document.createElement('a');
+                editLink.href = `/edit/${book.id}`;
+                editLink.textContent = 'Edit';
+                editCell.appendChild(editLink);
+                row.appendChild(editCell);
+
+                // Создание ячейки со ссылкой удаления
+                const deleteCell = document.createElement('td');
+                const deleteLink = document.createElement('a');
+                deleteLink.href = `/delete/${book.id}`;
+                deleteLink.textContent = 'Delete';
+                deleteCell.appendChild(deleteLink);
+                row.appendChild(deleteCell);
+
+                tbody.appendChild(row);
+            });
+        });
+</script>
+</body>
+</html>
