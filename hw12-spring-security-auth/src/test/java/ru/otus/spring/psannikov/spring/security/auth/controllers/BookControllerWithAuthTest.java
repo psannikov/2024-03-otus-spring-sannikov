@@ -1,6 +1,6 @@
 package ru.otus.spring.psannikov.spring.security.auth.controllers;
 
-import org.junit.jupiter.api.BeforeAll;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -8,8 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
+import org.springframework.http.MediaType;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import ru.otus.spring.psannikov.spring.security.auth.config.SecurityConfiguration;
 import ru.otus.spring.psannikov.spring.security.auth.dto.BookDto;
 import ru.otus.spring.psannikov.spring.security.auth.models.Author;
@@ -20,21 +22,22 @@ import ru.otus.spring.psannikov.spring.security.auth.services.AuthorService;
 import ru.otus.spring.psannikov.spring.security.auth.services.BookService;
 import ru.otus.spring.psannikov.spring.security.auth.services.GenreService;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+@DisplayName("Контроллер для Book с авторизацией должен")
 @WebMvcTest(BookController.class)
 @Import(SecurityConfiguration.class)
 class BookControllerWithAuthTest {
 
     @Autowired
-    private MockMvc mockMvc;
+    private MockMvc mvc;
 
     @MockBean
     private BookService bookService;
@@ -69,15 +72,6 @@ class BookControllerWithAuthTest {
                 mockGenre,
                 mockComments);
         mockBooks = List.of(mockBook);
-
-//        genres.add(new Genre(1L, "Genre1"));
-//        genres.add(new Genre(2L, "Genre2"));
-//        authors.add(new Author(1L, "Author1"));
-//        authors.add(new Author(2L, "Author2"));
-//        books.add(new BookDto(1L, "Book1", authors.get(0), genres.get(0)));
-//        books.add(new BookDto(2L, "Book2", authors.get(1), genres.get(1)));
-//        books.add(new BookDto(3L, "Book3", authors.get(1), genres.get(1)));
-
         userDetails = org.springframework.security.core.userdetails.User
                 .builder()
                 .username("User1")
@@ -86,156 +80,70 @@ class BookControllerWithAuthTest {
                 .build();
     }
 
-//    private void mock() {
-//        when(bookService.findAll()).thenReturn(books);
-//        when(genreService.findAll()).thenReturn(genres);
-//        when(authorService.findAll()).thenReturn(authors);
-//        when(bookService.findById(1L)).thenReturn(books.get(0));
-//    }
-//
-    @DisplayName("Должен вернуть страницу списка книг")
+    @DisplayName("вернуть список книг")
     @Test
-    void listBooksPage() throws Exception {
-//        mock();
-        mockMvc.perform(get("/books").with(user(userDetails)))
+    void getAllBooksTest() throws Exception {
+        when(bookService.findAll()).thenReturn(mockBooks);
+        List<BookDto> expectedResult = mockBooks.stream()
+                .map(BookDto::toDto).collect(Collectors.toList());
+        mvc.perform(MockMvcRequestBuilders
+                        .get("/api/v1/book")
+                        .with(user(userDetails)))
                 .andExpect(status().isOk())
-                .andExpect(view().name("books"));
+                .andExpect(content().json(asJsonString(expectedResult)));
+        verify(bookService, times(1)).findAll();
     }
-//
-//
-//    @DisplayName("Должен вернуть страницу добавления книги")
-//    @Test
-//    void createBookPage() throws Exception {
-//        mock();
-//
-//        mockMvc.perform(get("/create/book").with(user(userDetails)))
-//                .andExpect(status().isOk())
-//                .andExpect(view().name("create"))
-//                .andExpect(model().attribute("genres", genres))
-//                .andExpect(model().attribute("authors", authors));
-//    }
-//
-//    @DisplayName("Должен вернуть страницу редактирования книги")
-//    @Test
-//    void editPage() throws Exception {
-//        mock();
-//        final BookDto bookDto = books.get(0);
-//
-//        mockMvc.perform(get(String.format("/edit/book/%d", bookDto.getId())).with(user(userDetails)))
-//                .andExpect(status().isOk())
-//                .andExpect(view().name("edit"))
-//                .andExpect(model().attribute("genres", genres))
-//                .andExpect(model().attribute("authors", authors))
-//                .andExpect(model().attribute("book", bookDto));
-//    }
-//
-//
-//    @DisplayName("Должен вернуть страницу удаления книги")
-//    @Test
-//    void deletePage() throws Exception {
-//        mock();
-//        final BookDto bookDto = books.get(0);
-//
-//        mockMvc.perform(get(String.format("/delete/book/%d", bookDto.getId())).with(user(userDetails)))
-//                .andExpect(status().isOk())
-//                .andExpect(view().name("delete"))
-//                .andExpect(model().attribute("book", bookDto));
-//    }
-//
-//    @DisplayName("Должен изменить книгу")
-//    @Test
-//    void update() throws Exception {
-//        final BookDto bookDto = books.get(0);
-//        final BookUpdateDto bookUpdateDto = getBookUpdateDtoByBookDto(bookDto);
-//
-//        when(bookService.update(bookUpdateDto)).thenReturn(bookDto);
-//
-//        mockMvc.perform(post(String.format("/edit/book/%d", bookUpdateDto.getId())).with(user(userDetails))
-//                .param("id", bookUpdateDto.getId().toString())
-//                .param("title", bookUpdateDto.getTitle())
-//                .param("authorId", bookUpdateDto.getAuthorId().toString())
-//                .param("genreId", bookUpdateDto.getGenreId().toString())
-//        )
-//                .andExpect(status().is3xxRedirection())
-//                .andExpect(view().name("redirect:/list"));
-//    }
-//
-//    @DisplayName("Должен вернуть страницу редактирования книги если был передан не допустимый title книги")
-//    @Test
-//    void editBookValidTitle() throws Exception {
-//        final BookDto bookDto = books.get(0);
-//        final BookUpdateDto bookUpdateDto = getBookUpdateDtoByBookDto(bookDto);
-//        bookUpdateDto.setTitle("R");
-//
-//        when(bookService.update(bookUpdateDto)).thenReturn(bookDto);
-//
-//        mockMvc.perform(post(String.format("/edit/book/%d", bookUpdateDto.getId())).with(user(userDetails))
-//                .param("id", bookUpdateDto.getId().toString())
-//                .param("title", bookUpdateDto.getTitle())
-//                .param("authorId", bookUpdateDto.getAuthorId().toString())
-//                .param("genreId", bookUpdateDto.getGenreId().toString())
-//        )
-//                .andExpect(status().is3xxRedirection())
-//                .andExpect(view().name(String.format("redirect:/edit/book/%d", bookUpdateDto.getId())));
-//    }
-//
-//    @DisplayName("Должен удалить книгу")
-//    @Test
-//    void deleteBook() throws Exception {
-//        mockMvc.perform(post(String.format("/delete/book/%d", books.get(0).getId())).with(user(userDetails)))
-//                .andExpect(status().is3xxRedirection())
-//                .andExpect(view().name("redirect:/list"));
-//    }
-//
-//    @DisplayName("Должен добавить книгу")
-//    @Test
-//    void createBook() throws Exception {
-//        final BookDto bookDto = books.get(0);
-//        final BookCreateDto bookCreateDto = getBookCreateDtoByBookDto(bookDto);
-//
-//        when(bookService.create(bookCreateDto)).thenReturn(bookDto);
-//
-//        mockMvc.perform(post("/create/book").with(user(userDetails))
-//                .param("title", bookCreateDto.getTitle())
-//                .param("authorId", bookCreateDto.getAuthorId().toString())
-//                .param("genreId", bookCreateDto.getGenreId().toString())
-//        )
-//                .andExpect(status().is3xxRedirection())
-//                .andExpect(view().name("redirect:/list"));
-//    }
-//
-//    @DisplayName("Должен вернуть на страницу добавления книги")
-//    @Test
-//    void createBookValidTitle() throws Exception {
-//        final BookDto bookDto = books.get(0);
-//        final BookCreateDto bookCreateDto = getBookCreateDtoByBookDto(bookDto);
-//        bookCreateDto.setTitle("r");
-//
-//        when(bookService.create(bookCreateDto)).thenReturn(bookDto);
-//
-//        mockMvc.perform(post("/create/book").with(user(userDetails))
-//                .param("title", bookCreateDto.getTitle())
-//                .param("authorId", bookCreateDto.getAuthorId().toString())
-//                .param("genreId", bookCreateDto.getGenreId().toString())
-//        )
-//                .andExpect(status().is3xxRedirection())
-//                .andExpect(view().name("redirect:/create/book"));
-//    }
-//
-//    private BookCreateDto getBookCreateDtoByBookDto(BookDto bookdto) {
-//        final BookCreateDto bookCreateDto = new BookCreateDto();
-//        bookCreateDto.setTitle(bookdto.getTitle());
-//        bookCreateDto.setAuthorId(bookdto.getAuthorDto().getId());
-//        bookCreateDto.setGenreId(bookdto.getGenreDto().getId());
-//        return bookCreateDto;
-//    }
-//
-//    private BookUpdateDto getBookUpdateDtoByBookDto(BookDto bookDto) {
-//        final BookUpdateDto bookUpdateDto = new BookUpdateDto();
-//        bookUpdateDto.setId(bookDto.getId());
-//        bookUpdateDto.setTitle(bookDto.getTitle());
-//        bookUpdateDto.setAuthorId(bookDto.getAuthorDto().getId());
-//        bookUpdateDto.setGenreId(bookDto.getGenreDto().getId());
-//        return bookUpdateDto;
-//    }
+
+    @DisplayName("редактировать книгу")
+    @Test
+    void editBookTest() throws Exception {
+        when(bookService.findById(ID)).thenReturn(Optional.ofNullable(mockBook));
+        when(bookService.update(ID, TITLE, ID, ID, mockComments)).thenReturn(mockBook);
+        BookDto expectedResult = BookDto.toDto(mockBook);
+        mvc.perform(MockMvcRequestBuilders
+                        .post("/api/v1/book/{id}", ID)
+                        .with(user(userDetails))
+                        .content(asJsonString(expectedResult))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(content().json(asJsonString(expectedResult)));
+        verify(bookService, times(1)).findById(ID);
+        verify(bookService, times(1)).update(ID, TITLE, ID, ID, mockComments);
+    }
+
+    @DisplayName("создавать новую книгу")
+    @Test
+    void createBookTest() throws Exception {
+        when(bookService.insert(TITLE, ID, ID)).thenReturn(mockBook);
+        BookDto expectedResult = BookDto.toDto(mockBook);
+        mvc.perform(MockMvcRequestBuilders
+                        .post("/api/v1/book")
+                        .with(user(userDetails))
+                        .contentType(MediaType.APPLICATION_JSON_UTF8)
+                        .content(asJsonString(expectedResult)))
+                .andExpect(status().isOk())
+                .andExpect(content().json(asJsonString(expectedResult)));
+        verify(bookService, times(1)).insert(TITLE, ID, ID);
+    }
+
+    @DisplayName("удалять книгу")
+    @Test
+    void deleteBookTest() throws Exception {
+        mvc.perform(MockMvcRequestBuilders
+                        .delete("/api/v1/book/{id}", ID)
+                        .with(user(userDetails)))
+                .andExpect(status().isOk());
+        verify(bookService, times(1)).deleteById(ID);
+    }
+
+    public static String asJsonString(final Object obj) {
+        try {
+            final ObjectMapper mapper = new ObjectMapper();
+            final String jsonContent = mapper.writeValueAsString(obj);
+            return jsonContent;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

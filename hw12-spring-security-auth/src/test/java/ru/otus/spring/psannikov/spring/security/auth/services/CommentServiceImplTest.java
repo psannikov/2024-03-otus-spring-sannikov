@@ -50,7 +50,7 @@ public class CommentServiceImplTest {
     @Test
     public void findByIdTest() {
         when(commentRepository.findById(ID)).thenReturn(Optional.of(mockComment));
-        var actualComment = commentRepository.findById(ID);
+        var actualComment = commentService.findById(ID);
         assertThat(actualComment).isNotEmpty();
         assertThat(actualComment.get()).isEqualTo(mockComment);
     }
@@ -66,7 +66,7 @@ public class CommentServiceImplTest {
         verify(commentRepository, times(1)).save(Mockito.any(Comment.class));
     }
 
-    @DisplayName("должен изменять существующую книгу")
+    @DisplayName("должен изменять существующий комментарий")
     @Test
     public void updateTest() {
         when(bookRepository.findById(ID)).thenReturn(Optional.of(mockBook));
