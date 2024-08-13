@@ -4,4 +4,4 @@
 3. После завершения созданиея image проверяю что он создался:
     docker image ls
 4. Запускаю созданный image:
-    docker run hw17-docker:v1
+    docker run -p 8080:8080 hw17-docker:v1
