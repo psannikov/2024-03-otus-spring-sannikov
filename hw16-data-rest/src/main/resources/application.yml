@@ -19,17 +19,22 @@ spring:
     rest:
       base-path: /datarest
 management:
-  endpoints:
-    web:
-      exposure:
-        include: "*"
   endpoint:
     health:
       show-details: always
+    metrics:
+      enabled: true
+    logfile:
+      enabled: true
   health:
     defaults:
       enabled: true
-
+  endpoints:
+    web:
+      exposure:
+        include: health, metrics, logfile
 logging:
   level:
     ROOT: INFO
+  file:
+    name: LibraryLog.log
