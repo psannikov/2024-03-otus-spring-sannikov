@@ -32,9 +32,6 @@ public class BookPageControllerWithAuthTest {
     @Autowired
     private MockMvc mvc;
 
-    @Autowired
-    private BookPageController BookPageController;
-
     @MockBean
     private BookService bookService;
 
