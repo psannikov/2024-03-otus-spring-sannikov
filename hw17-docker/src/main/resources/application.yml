@@ -1,6 +1,8 @@
 spring:
   datasource:
-    url: jdbc:h2:mem:testdb
+    url: jdbc:postgresql://localhost:5432/libraryDB
+    username: usr
+    password: pwd
   sql:
     init:
       mode: always
