@@ -114,6 +114,12 @@
         <module>cw31-data-rest</module>
         <module>cw31-data-rest/spring-31-exercise</module>
         <module>cw31-data-rest/spring-31-solution</module>
+        <module>cw32-http-client</module>
+        <module>cw32-http-client/rest-template</module>
+        <module>cw32-http-client/soap-client</module>
+        <module>cw32-http-client/soap-server</module>
+        <module>cw33-docker</module>
+        <module>cw33-docker/docker-compose-example</module>
     </modules>
 
     <properties>
