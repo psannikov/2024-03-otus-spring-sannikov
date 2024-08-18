@@ -17,7 +17,7 @@ services:
       - "8080:8080"
     # Эти свойства перегружают соответствующие в application.yml
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://localhost:5432/libraryDB
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/libraryDB
       - SPRING_DATASOURCE_USERNAME=usr
       - SPRING_DATASOURCE_PASSWORD=pwd
     depends_on:
