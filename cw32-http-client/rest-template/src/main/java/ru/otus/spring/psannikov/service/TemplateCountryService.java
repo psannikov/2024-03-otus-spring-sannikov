@@ -3,10 +3,13 @@ package ru.otus.spring.psannikov.service;
 import java.net.URI;
 import java.util.List;
 
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
+import org.springframework.retry.annotation.Backoff;
+import org.springframework.retry.annotation.Retryable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestOperations;
 import org.springframework.web.client.RestTemplate;
@@ -20,12 +23,14 @@ import ru.otus.spring.psannikov.dto.Country;
 @Slf4j
 @RequiredArgsConstructor
 @Service
+@Cacheable(cacheNames = "countries")
 public class TemplateCountryService implements CountryService {
 	final ClientProperties properties;
 
 	private final RestOperations rest = new RestTemplate();
 
 	@Override
+	@Retryable(retryFor = Exception.class, maxAttempts = 5, backoff = @Backoff(delay = 5000))
 	public Country findByCode(String id) {
 		log.info("RestTemplate Request findByCode");
 		return rest.getForObject("http://api.countrylayer.com/v2/alpha/" + id + "?access_key=" + properties.getKey(),

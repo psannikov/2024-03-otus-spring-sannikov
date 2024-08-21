@@ -27,7 +27,7 @@ import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import org.springframework.util.ClassUtils;
 import org.springframework.ws.client.core.WebServiceTemplate;
 
-import ru.otus.hello.web_service.GetCountryRequest;
+import ru.otus.spring.psannikov.hello.web_service.GetCountryRequest;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public class ApplicationIntegrationTests {

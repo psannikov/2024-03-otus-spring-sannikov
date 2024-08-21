@@ -6,8 +6,8 @@ import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
-import ru.otus.hello.web_service.GetCountryRequest;
-import ru.otus.hello.web_service.GetCountryResponse;
+import ru.otus.spring.psannikov.hello.web_service.GetCountryRequest;
+import ru.otus.spring.psannikov.hello.web_service.GetCountryResponse;
 
 @Endpoint
 public class CountryEndpoint {

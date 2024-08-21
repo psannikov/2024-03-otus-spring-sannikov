@@ -63,7 +63,7 @@
                         <source>${project.basedir}/src/main/resources/countries.xsd</source>
 
                     </sources>
-                    <packageName>ru.otus.hello.web_service</packageName>
+                    <packageName>ru.otus.spring.psannikov.hello.web_service</packageName>
                 </configuration>
             </plugin>
         </plugins>

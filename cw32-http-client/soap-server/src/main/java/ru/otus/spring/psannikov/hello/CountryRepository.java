@@ -7,8 +7,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
 import jakarta.annotation.PostConstruct;
-import ru.otus.hello.web_service.Country;
-import ru.otus.hello.web_service.Currency;
+import ru.otus.spring.psannikov.hello.web_service.Country;
+import ru.otus.spring.psannikov.hello.web_service.Currency;
 
 @Component
 public class CountryRepository {
