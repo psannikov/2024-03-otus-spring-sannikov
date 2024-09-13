@@ -10,6 +10,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import ru.otus.spring.psannikov.spring.security.auth.config.SecurityConfiguration;
@@ -33,8 +34,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @DisplayName("Контроллер для Book с авторизацией должен")
 @WebMvcTest(BookController.class)
-@Import(SecurityConfiguration.class)
-class BookControllerWithAuthTest {
+@WithMockUser
+class BookControllerTest {
 
     @Autowired
     private MockMvc mvc;
@@ -59,7 +60,6 @@ class BookControllerWithAuthTest {
     private List<Book> mockBooks;
     private Comment mockComment;
     private List<Comment> mockComments;
-    private static UserDetails userDetails;
 
     @BeforeEach
     void init() {
@@ -72,12 +72,6 @@ class BookControllerWithAuthTest {
                 mockGenre,
                 mockComments);
         mockBooks = List.of(mockBook);
-        userDetails = org.springframework.security.core.userdetails.User
-                .builder()
-                .username("User1")
-                .password("Pass1")
-                .roles("USER")
-                .build();
     }
 
     @DisplayName("вернуть список книг")
@@ -86,9 +80,7 @@ class BookControllerWithAuthTest {
         when(bookService.findAll()).thenReturn(mockBooks);
         List<BookDto> expectedResult = mockBooks.stream()
                 .map(BookDto::toDto).collect(Collectors.toList());
-        mvc.perform(MockMvcRequestBuilders
-                        .get("/api/v1/book")
-                        .with(user(userDetails)))
+        mvc.perform(MockMvcRequestBuilders.get("/api/v1/book"))
                 .andExpect(status().isOk())
                 .andExpect(content().json(asJsonString(expectedResult)));
         verify(bookService, times(1)).findAll();
@@ -102,7 +94,6 @@ class BookControllerWithAuthTest {
         BookDto expectedResult = BookDto.toDto(mockBook);
         mvc.perform(MockMvcRequestBuilders
                         .post("/api/v1/book/{id}", ID)
-                        .with(user(userDetails))
                         .content(asJsonString(expectedResult))
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
@@ -119,7 +110,6 @@ class BookControllerWithAuthTest {
         BookDto expectedResult = BookDto.toDto(mockBook);
         mvc.perform(MockMvcRequestBuilders
                         .post("/api/v1/book")
-                        .with(user(userDetails))
                         .contentType(MediaType.APPLICATION_JSON_UTF8)
                         .content(asJsonString(expectedResult)))
                 .andExpect(status().isOk())
@@ -130,9 +120,7 @@ class BookControllerWithAuthTest {
     @DisplayName("удалять книгу")
     @Test
     void deleteBookTest() throws Exception {
-        mvc.perform(MockMvcRequestBuilders
-                        .delete("/api/v1/book/{id}", ID)
-                        .with(user(userDetails)))
+        mvc.perform(MockMvcRequestBuilders.delete("/api/v1/book/{id}", ID))
                 .andExpect(status().isOk());
         verify(bookService, times(1)).deleteById(ID);
     }
