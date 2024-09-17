@@ -115,6 +115,7 @@
         <module>cw31-data-rest/spring-31-exercise</module>
         <module>cw31-data-rest/spring-31-solution</module>
         <module>hw12-spring-security-auth</module>
+        <module>hw13-spring-security-acl</module>
     </modules>
 
     <properties>
