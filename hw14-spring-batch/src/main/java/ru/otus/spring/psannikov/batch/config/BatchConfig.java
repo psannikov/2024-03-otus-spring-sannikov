@@ -1,13 +1,15 @@
 package ru.otus.spring.psannikov.batch.config;
 
+import jakarta.persistence.EntityManagerFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.batch.core.*;
-import org.springframework.batch.core.configuration.annotation.DefaultBatchConfigurer;
-import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
-import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
-import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
+import org.springframework.batch.core.ItemReadListener;
+import org.springframework.batch.core.Job;
+import org.springframework.batch.core.Step;
+import org.springframework.batch.core.job.builder.JobBuilder;
 import org.springframework.batch.core.launch.support.RunIdIncrementer;
+import org.springframework.batch.core.repository.JobRepository;
+import org.springframework.batch.core.step.builder.StepBuilder;
 import org.springframework.batch.item.ItemProcessor;
 import org.springframework.batch.item.ItemReader;
 import org.springframework.batch.item.ItemWriter;
@@ -17,34 +19,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.core.MongoTemplate;
-import ru.otus.spring.psannikov.batch.models.mongo.MongoAuthor;
+import org.springframework.transaction.PlatformTransactionManager;
+import ru.otus.spring.psannikov.batch.models.jpa.Book;
 import ru.otus.spring.psannikov.batch.models.mongo.MongoBook;
-import ru.otus.spring.psannikov.batch.models.mongo.MongoComment;
-import ru.otus.spring.psannikov.batch.models.mongo.MongoGenre;
-import ru.otus.spring.psannikov.batch.models.postgres.Book;
-
-import javax.persistence.EntityManagerFactory;
-import javax.sql.DataSource;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Configuration
-@EnableBatchProcessing
-public class BatchConfig extends DefaultBatchConfigurer {
+public class BatchConfig {
 
     private final Logger logger = LoggerFactory.getLogger("Log");
-    private JobBuilderFactory jobBuilderFactory;
-    private StepBuilderFactory stepBuilderFactory;
 
     @Autowired
-    public BatchConfig(JobBuilderFactory jobBuilderFactory, StepBuilderFactory stepBuilderFactory) {
-        this.jobBuilderFactory = jobBuilderFactory;
-        this.stepBuilderFactory = stepBuilderFactory;
-    }
+    private JobRepository jobRepository;
 
-    @Override
-    public void setDataSource(DataSource dataSource) {
-    }
+    @Autowired
+    private PlatformTransactionManager platformTransactionManager;
+
+    public static final String IMPORT_USER_JOB_NAME = "importUserJob";
+    private static final int CHUNK_SIZE = 5;
 
     @Bean
     public ItemReader<Book> reader(EntityManagerFactory entityManagerFactory) {
@@ -57,15 +48,7 @@ public class BatchConfig extends DefaultBatchConfigurer {
 
     @Bean
     public ItemProcessor processor() {
-        return (ItemProcessor<Book, MongoBook>) book -> {
-            String title = book.getTitle();
-            MongoAuthor author = MongoAuthor.convert(book.getAuthor());
-            MongoGenre genre = MongoGenre.convert(book.getGenre());
-            List<MongoComment> comments = book.getComments().stream().map(MongoComment::convert).collect(Collectors.toList());
-
-            return new MongoBook(title, author, genre, comments);
-
-        };
+        return (ItemProcessor<Book, MongoBook>) book -> MongoBook.convert(book);
     }
 
     @Bean
@@ -78,28 +61,18 @@ public class BatchConfig extends DefaultBatchConfigurer {
 
     @Bean
     public Job importUserJob(Step step1) {
-        return jobBuilderFactory.get("importBookJob")
+        return new JobBuilder(IMPORT_USER_JOB_NAME, jobRepository)
                 .incrementer(new RunIdIncrementer())
                 .flow(step1)
                 .end()
-                .listener(new JobExecutionListener() {
-                    @Override
-                    public void beforeJob(JobExecution jobExecution) {
-                        logger.info("---------------------->Start job");
-                    }
-
-                    @Override
-                    public void afterJob(JobExecution jobExecution) {
-                        logger.info("<----------------------End job");
-                    }
-                })
                 .build();
     }
 
     @Bean
     public Step step1(ItemReader reader, ItemWriter writer, ItemProcessor processor) {
-        return stepBuilderFactory.get("step1")
-                .chunk(2)
+
+        return new StepBuilder("transformBooksStep", jobRepository)
+                .<Book, MongoBook>chunk(CHUNK_SIZE, platformTransactionManager)
                 .reader(reader)
                 .processor(processor)
                 .writer(writer)

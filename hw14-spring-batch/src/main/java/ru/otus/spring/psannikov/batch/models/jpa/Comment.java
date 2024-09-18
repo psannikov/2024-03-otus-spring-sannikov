@@ -1,8 +1,7 @@
-package ru.otus.spring.psannikov.batch.models.postgres;
+package ru.otus.spring.psannikov.batch.models.jpa;
 
+import jakarta.persistence.*;
 import lombok.*;
-
-import javax.persistence.*;
 
 @Setter
 @Getter

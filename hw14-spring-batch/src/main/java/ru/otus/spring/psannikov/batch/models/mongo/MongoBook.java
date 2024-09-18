@@ -3,12 +3,15 @@ package ru.otus.spring.psannikov.batch.models.mongo;
 import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import ru.otus.spring.psannikov.batch.models.jpa.Author;
+import ru.otus.spring.psannikov.batch.models.jpa.Book;
 
 import java.util.List;
 
 
 @Setter
 @Getter
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Document(collection = "books")
@@ -31,5 +34,12 @@ public class MongoBook {
         this.author = author;
         this.genre = genre;
         this.comments = comments;
+    }
+
+    public static MongoBook convert(Book book) {
+        return new MongoBook(book.getTitle(),
+                MongoAuthor.convert(book.getAuthor()),
+                MongoGenre.convert(book.getGenre()),
+                book.getComments().stream().map(MongoComment::convert).toList());
     }
 }

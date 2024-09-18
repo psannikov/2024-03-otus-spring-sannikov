@@ -1,7 +1,7 @@
 package ru.otus.spring.psannikov.batch.repositories;
 
 import org.springframework.data.repository.CrudRepository;
-import ru.otus.spring.psannikov.batch.models.postgres.Book;
+import ru.otus.spring.psannikov.batch.models.jpa.Book;
 
 import java.util.List;
 

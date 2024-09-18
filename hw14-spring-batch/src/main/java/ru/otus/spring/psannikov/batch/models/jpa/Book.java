@@ -1,8 +1,8 @@
-package ru.otus.spring.psannikov.batch.models.postgres;
+package ru.otus.spring.psannikov.batch.models.jpa;
 
+import jakarta.persistence.*;
 import lombok.*;
 
-import javax.persistence.*;
 import java.util.List;
 
 
@@ -12,12 +12,6 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table(name = "books")
-@NamedEntityGraph(name = "books-authors-entity-graph",
-        attributeNodes = {@NamedAttributeNode("author")})
-@NamedEntityGraph(name = "books-genres-entity-graph",
-        attributeNodes = {@NamedAttributeNode("genre")})
-@NamedEntityGraph(name = "books-comment-entity-graph",
-        attributeNodes = {@NamedAttributeNode("comments")})
 @EqualsAndHashCode(of = {"id"})
 public class Book {
 
