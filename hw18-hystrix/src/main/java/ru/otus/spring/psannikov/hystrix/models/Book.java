@@ -8,6 +8,7 @@ import java.util.List;
 
 @Setter
 @Getter
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity

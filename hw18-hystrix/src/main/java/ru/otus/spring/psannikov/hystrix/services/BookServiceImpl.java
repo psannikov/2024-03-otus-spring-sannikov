@@ -1,11 +1,15 @@
 package ru.otus.spring.psannikov.hystrix.services;
 
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+import io.github.resilience4j.retry.annotation.Retry;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.otus.spring.psannikov.hystrix.exceptions.EntityNotFoundException;
+import ru.otus.spring.psannikov.hystrix.models.Author;
 import ru.otus.spring.psannikov.hystrix.models.Book;
 import ru.otus.spring.psannikov.hystrix.models.Comment;
+import ru.otus.spring.psannikov.hystrix.models.Genre;
 import ru.otus.spring.psannikov.hystrix.repositories.AuthorRepository;
 import ru.otus.spring.psannikov.hystrix.repositories.BookRepository;
 import ru.otus.spring.psannikov.hystrix.repositories.GenreRepository;
@@ -23,14 +27,28 @@ public class BookServiceImpl implements BookService {
 
     private final BookRepository bookRepository;
 
+    @Retry(name = "findByIdRetry")
     @Override
     public Optional<Book> findById(long id) {
         return bookRepository.findById(id);
     }
 
+    @CircuitBreaker(name = "findAllCircuitBreaker", fallbackMethod = "findAllRecoverMethod")
     @Override
     public List<Book> findAll() {
+        ToolsService.sleepRandomly();
         return bookRepository.findAll();
+    }
+
+    public List<Book> findAllRecoverMethod(Exception ex) {
+        var book = Book.builder()
+                .id(0L)
+                .title("N/A")
+                .author(Author.builder().id(0L).fullName("N/A").build())
+                .genre(Genre.builder().id(0L).name("N/A").build())
+                .build();
+        var books = List.of(book);
+        return books;
     }
 
     @Override
