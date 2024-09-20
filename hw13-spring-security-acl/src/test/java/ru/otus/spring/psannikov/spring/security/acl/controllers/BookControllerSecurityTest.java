@@ -50,7 +50,7 @@ public class BookControllerSecurityTest {
 
     private final long id = 1L;
 
-    private static final Stream<MethodTestData> provideUrlsAndMethods() {
+    private static Stream<MethodTestData> provideUrlsAndMethods() {
         return Stream.of(
                 new MethodTestData("/api/v1/book", GET),
                 new MethodTestData("/api/v1/book/1", POST),
@@ -66,7 +66,7 @@ public class BookControllerSecurityTest {
             .roles("LIBRARIAN")
             .build();
 
-    private Book mockBook = new Book(id, "TITLE",
+    private final Book mockBook = new Book(id, "TITLE",
             new Author(id, "AUTHOR"),
             new Genre(id, "GENRE"),
             new ArrayList<>());

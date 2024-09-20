@@ -25,9 +25,7 @@ public class UserDetailServiceImpl implements UserDetailsService {
         var roles = user
                 .getRoles()
                 .stream()
-                .map(Role::getName)
-                .collect(Collectors.toSet())
-                .toArray(new String[0]);
+                .map(Role::getName).distinct().toArray(String[]::new);
 
         return org.springframework.security.core.userdetails.User
                 .builder()

@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
@@ -22,7 +21,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @DisplayName("Контроллер для BookPage должен")
 @WebMvcTest(controllers = BookPageController.class,
@@ -42,25 +43,22 @@ public class BookPageControllerTest {
     private GenreService genreService;
 
     private final long ID = 1L;
-    private final String TITLE = "Title_1";
-    private final String AUTHOR = "Author_1";
-    private final String GENRE = "Genre_1";
     private Book mockBook;
-    private Author mockAuthor;
-    private Genre mockGenre;
-    private List<Book> mockBooks;
     private List<Author> mockAuthors;
     private List<Genre> mockGenres;
 
     @BeforeEach
     void init() {
+        String TITLE = "Title_1";
+        String AUTHOR = "Author_1";
+        String GENRE = "Genre_1";
         mockBook = new Book(ID, TITLE,
                 new Author(ID, AUTHOR),
                 new Genre(ID, GENRE),
                 new ArrayList<>());
-        mockAuthor = new Author(ID, AUTHOR);
-        mockGenre = new Genre(ID, GENRE);
-        mockBooks = List.of(mockBook);
+        Author mockAuthor = new Author(ID, AUTHOR);
+        Genre mockGenre = new Genre(ID, GENRE);
+        List<Book> mockBooks = List.of(mockBook);
         mockAuthors = List.of(mockAuthor);
         mockGenres = List.of(mockGenre);
     }

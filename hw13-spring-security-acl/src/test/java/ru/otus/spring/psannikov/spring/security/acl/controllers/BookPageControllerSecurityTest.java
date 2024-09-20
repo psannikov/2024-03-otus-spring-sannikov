@@ -53,7 +53,7 @@ public class BookPageControllerSecurityTest {
                 .roles("LIBRARIAN")
                 .build();
 
-    private Book mockBook = new Book(id, "TITLE",
+    private final Book mockBook = new Book(id, "TITLE",
                 new Author(id, "AUTHOR"),
                 new Genre(id, "GENRE"),
                 new ArrayList<>());

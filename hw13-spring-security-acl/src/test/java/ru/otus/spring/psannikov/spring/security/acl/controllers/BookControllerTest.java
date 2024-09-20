@@ -9,7 +9,6 @@ import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfi
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import ru.otus.spring.psannikov.spring.security.acl.dto.BookDto;
@@ -25,7 +24,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -52,17 +53,14 @@ class BookControllerTest {
     private final static String GENRE = "Genre_1";
     private final static String COMMENT = "Comment_1";
     private Book mockBook;
-    private Author mockAuthor;
-    private Genre mockGenre;
     private List<Book> mockBooks;
-    private Comment mockComment;
     private List<Comment> mockComments;
 
     @BeforeEach
     void init() {
-        mockAuthor = new Author(ID, AUTHOR);
-        mockGenre = new Genre(ID, GENRE);
-        mockComment = new Comment(ID, COMMENT);
+        Author mockAuthor = new Author(ID, AUTHOR);
+        Genre mockGenre = new Genre(ID, GENRE);
+        Comment mockComment = new Comment(ID, COMMENT);
         mockComments = List.of(mockComment);
         mockBook = new Book(ID, TITLE,
                 mockAuthor,
