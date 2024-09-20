@@ -27,11 +27,14 @@ values
       (2, 'Book2_Comment1');
 
 insert into
-      users (login, password, role)
+      users (login, password)
 values
-      ('Admin', 'Admin', 'ADMIN'),
-      ('Reader', 'Reader', 'READER'),
-      ('Librarian', 'Librarian', 'LIBRARIAN');
+      ('Admin', 'Admin'),
+      ('Reader', 'Reader'),
+      ('Librarian', 'Librarian');
+insert into
+      roles (name, user_id)
+values('ADMIN',1), ('READER',2), ('LIBRARIAN', 3), ('READER',3), ('MANAGER',3), ('READER', 1);
 
 insert into
       acl_sid (id, principal, sid)

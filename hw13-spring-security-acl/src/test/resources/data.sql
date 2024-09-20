@@ -1,60 +1,34 @@
-insert into authors(full_name)
-values ('Author_1'),
-       ('Author_2'),
-       ('Author_3');
+insert into
+      authors (full_name)
+values
+      ('Author_1'),
+      ('Author_2'),
+      ('Author_3');
 
-insert into genres(name)
-values ('Genre_1'),
-       ('Genre_2'),
-       ('Genre_3');
+insert into
+      genres (name)
+values
+      ('Genre_1'),
+      ('Genre_2'),
+      ('Genre_3');
 
-insert into books(title, author_id, genre_id)
-values ('BookTitle_1', 1, 1),
-       ('BookTitle_2', 2, 2),
-       ('BookTitle_3', 3, 3);
+insert into
+      books (title, author_id, genre_id)
+values
+      ('BookTitle_1', 1, 1),
+      ('BookTitle_2', 2, 2),
+      ('BookTitle_3', 3, 3);
 
-insert into comments(book_id, full_comment)
-values (1, 'Book1_Comment1'),
-       (1, 'Book1_Comment2'),
-       (2, 'Book2_Comment1');
+insert into
+      comments (book_id, full_comment)
+values
+      (1, 'Book1_Comment1'),
+      (1, 'Book1_Comment2'),
+      (2, 'Book2_Comment1');
 
-insert into users(login, password)
-values ('User1', 'Pass1'),
-       ('User2', 'Pass2');
-
-insert into users(login, password, role)
-values('admin', 'admin', 'ADMIN'),
-      ('user', 'user', 'READER'),
-      ('lib', 'lib', 'LIBRARIAN');
-
-insert into acl_sid (id, principal, sid) values
-(1, true, 'admin'),
-(2, true, 'user'),
-(3, false, 'ROLE_LIBRARIAN');
-
-INSERT INTO acl_class (id, class, class_id_type) values
-(1, 'ru.otus.spring.psannikov.spring.security.acl.models.Book', 'java.lang.Long');
-
-insert into acl_object_identity (id, object_id_class, object_id_identity, parent_object, owner_sid, entries_inheriting) values
-(1, 1, 1, NULL, 3, false),
-(2, 1, 2, NULL, 3, false),
-(3, 1, 3, NULL, 3, false);
-
-insert into acl_entry (id, acl_object_identity, ace_order, sid, mask, granting, audit_success, audit_failure) values
---Права библиотекаря
-----на книгу 1
-(1, 1, 1, 3, 1, true, true, true),
-(2, 1, 2, 3, 2, true, true, true),
-(3, 1, 3, 3, 8, true, true, true), --точно ли 8
-----на книгу 2
-(4, 2, 1, 3, 1, true, true, true),
-(5, 2, 2, 3, 2, true, true, true),
-(6, 2, 3, 3, 8, true, true, true), --точно ли 8
-----на книгу 3
-(7, 3, 1, 3, 1, true, true, true),
-(8, 3, 2, 3, 2, true, true, true),
-(9, 3, 3, 3, 8, true, true, true), --точно ли 8
---Права читателя библиотеки
-(10, 1, 4, 2, 1, true, true, true),
-(11, 2, 4, 2, 1, true, true, true),
-(12, 3, 4, 2, 1, true, true, true);
+insert into
+      users (login, password, role)
+values
+      ('Admin', 'Admin', 'ADMIN'),
+      ('Reader', 'Reader', 'READER'),
+      ('Librarian', 'Librarian', 'LIBRARIAN');

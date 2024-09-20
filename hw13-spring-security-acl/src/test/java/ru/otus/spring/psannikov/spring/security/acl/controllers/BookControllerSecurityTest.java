@@ -63,7 +63,7 @@ public class BookControllerSecurityTest {
             .builder()
             .username("User1")
             .password("Pass1")
-            .roles("USER")
+            .roles("LIBRARIAN")
             .build();
 
     private Book mockBook = new Book(id, "TITLE",

@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.otus.spring.psannikov.spring.security.acl.models.Genre;
 import ru.otus.spring.psannikov.spring.security.acl.repositories.GenreRepository;
-import ru.otus.spring.psannikov.spring.security.acl.services.GenreService;
 
 import java.util.List;
 import java.util.Optional;

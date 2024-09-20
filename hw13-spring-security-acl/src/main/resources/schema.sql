@@ -48,7 +48,14 @@ CREATE TABLE
             id bigserial,
             login varchar(255) NOT NULL,
             password varchar(255) NOT NULL,
-            ROLE varchar(255) NOT NULL,
+            PRIMARY KEY (id)
+      );
+
+CREATE TABLE
+      roles (
+            id bigserial,
+            name varchar(255) NOT NULL,
+            user_id bigint REFERENCES users (id) ON DELETE CASCADE,
             PRIMARY KEY (id)
       );
 
