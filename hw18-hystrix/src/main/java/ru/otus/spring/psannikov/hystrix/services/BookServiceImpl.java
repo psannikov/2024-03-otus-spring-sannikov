@@ -6,10 +6,8 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.otus.spring.psannikov.hystrix.exceptions.EntityNotFoundException;
-import ru.otus.spring.psannikov.hystrix.models.Author;
 import ru.otus.spring.psannikov.hystrix.models.Book;
 import ru.otus.spring.psannikov.hystrix.models.Comment;
-import ru.otus.spring.psannikov.hystrix.models.Genre;
 import ru.otus.spring.psannikov.hystrix.repositories.AuthorRepository;
 import ru.otus.spring.psannikov.hystrix.repositories.BookRepository;
 import ru.otus.spring.psannikov.hystrix.repositories.GenreRepository;
@@ -40,14 +38,12 @@ public class BookServiceImpl implements BookService {
         return bookRepository.findAll();
     }
 
+    //Имитирую запрос в другой источник обновляя исходные данные того же источника
     public List<Book> findAllRecoverMethod(Exception ex) {
-        var book = Book.builder()
-                .id(0L)
-                .title("N/A")
-                .author(Author.builder().id(0L).fullName("N/A").build())
-                .genre(Genre.builder().id(0L).name("N/A").build())
-                .build();
-        var books = List.of(book);
+        var books = bookRepository.findAll();
+        books.forEach(book -> {
+            book.setTitle(book.getTitle().toUpperCase());
+        });
         return books;
     }
 

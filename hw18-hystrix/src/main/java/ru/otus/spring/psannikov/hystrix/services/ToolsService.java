@@ -6,7 +6,7 @@ public class ToolsService {
     public static void sleepRandomly() {
         Random rand = new Random();
         int randomNum = rand.nextInt(3) + 1;
-        if(randomNum == 3) {
+        if (randomNum == 3) {
             System.out.println("It is a chance for demonstrating Hystrix action");
             try {
                 System.out.println("Start sleeping...." + System.currentTimeMillis());

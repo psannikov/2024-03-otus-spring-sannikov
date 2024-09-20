@@ -28,12 +28,12 @@ public class GenreServiceImpl implements GenreService {
         return genreRepository.findAll();
     }
 
+    //Имитирую запрос в другой источник обновляя исходные данные того же источника
     public List<Genre> findAllRecoverMethod(Exception ex) {
-        var genre = Genre.builder()
-                .id(0L)
-                .name("N/A")
-                .build();
-        var genres = List.of(genre);
+        var genres = genreRepository.findAll();
+        genres.forEach(genre -> {
+            genre.setName(genre.getName().toUpperCase());
+        });
         return genres;
     }
 }

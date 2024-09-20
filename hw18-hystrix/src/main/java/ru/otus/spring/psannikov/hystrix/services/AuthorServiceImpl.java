@@ -28,12 +28,12 @@ public class AuthorServiceImpl implements AuthorService {
         return authorRepository.findAll();
     }
 
+    //Имитирую запрос в другой источник обновляя исходные данные того же источника
     public List<Author> findAllRecoverMethod(Exception ex) {
-        var author = Author.builder()
-                .id(0L)
-                .fullName("N/A")
-                .build();
-        var authors = List.of(author);
+        var authors = authorRepository.findAll();
+        authors.forEach(author -> {
+            author.setFullName(author.getFullName().toUpperCase());
+        });
         return authors;
     }
 
