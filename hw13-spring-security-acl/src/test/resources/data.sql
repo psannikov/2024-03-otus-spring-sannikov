@@ -25,10 +25,3 @@ values
       (1, 'Book1_Comment1'),
       (1, 'Book1_Comment2'),
       (2, 'Book2_Comment1');
-
-insert into
-      users (login, password, role)
-values
-      ('Admin', 'Admin', 'ADMIN'),
-      ('Reader', 'Reader', 'READER'),
-      ('Librarian', 'Librarian', 'LIBRARIAN');
