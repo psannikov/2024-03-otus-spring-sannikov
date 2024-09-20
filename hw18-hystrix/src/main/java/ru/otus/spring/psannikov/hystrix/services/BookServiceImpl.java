@@ -41,9 +41,7 @@ public class BookServiceImpl implements BookService {
     //Имитирую запрос в другой источник обновляя исходные данные того же источника
     public List<Book> findAllRecoverMethod(Exception ex) {
         var books = bookRepository.findAll();
-        books.forEach(book -> {
-            book.setTitle(book.getTitle().toUpperCase());
-        });
+        books.forEach(book -> book.setTitle(book.getTitle().toUpperCase()));
         return books;
     }
 

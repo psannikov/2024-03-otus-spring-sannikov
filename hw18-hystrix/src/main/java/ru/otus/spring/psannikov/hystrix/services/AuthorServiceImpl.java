@@ -31,9 +31,7 @@ public class AuthorServiceImpl implements AuthorService {
     //Имитирую запрос в другой источник обновляя исходные данные того же источника
     public List<Author> findAllRecoverMethod(Exception ex) {
         var authors = authorRepository.findAll();
-        authors.forEach(author -> {
-            author.setFullName(author.getFullName().toUpperCase());
-        });
+        authors.forEach(author -> author.setFullName(author.getFullName().toUpperCase()));
         return authors;
     }
 

@@ -31,9 +31,7 @@ public class GenreServiceImpl implements GenreService {
     //Имитирую запрос в другой источник обновляя исходные данные того же источника
     public List<Genre> findAllRecoverMethod(Exception ex) {
         var genres = genreRepository.findAll();
-        genres.forEach(genre -> {
-            genre.setName(genre.getName().toUpperCase());
-        });
+        genres.forEach(genre -> genre.setName(genre.getName().toUpperCase()));
         return genres;
     }
 }
