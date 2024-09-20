@@ -9,8 +9,6 @@ import ru.otus.spring.psannikov.spring.security.acl.models.Role;
 import ru.otus.spring.psannikov.spring.security.acl.models.User;
 import ru.otus.spring.psannikov.spring.security.acl.repositories.UserRepository;
 
-import java.util.stream.Collectors;
-
 @Service
 @AllArgsConstructor
 public class UserDetailServiceImpl implements UserDetailsService {
