@@ -27,7 +27,7 @@ public class BookController {
 
     @PostMapping("/api/v1/book/{id}")
     public BookDto editBook(@PathVariable Long id, @RequestBody BookDto bookDto) {
-        var comments = bookService.findById(id).get().getComments();
+        var comments = bookService.findById(id).getComments();
         var book = bookService.update(id, bookDto.getTitle(), bookDto.getAuthorId(), bookDto.getGenreId(), comments);
         return BookDto.toDto(book);
     }

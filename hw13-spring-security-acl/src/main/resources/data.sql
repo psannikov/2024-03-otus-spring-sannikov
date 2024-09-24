@@ -46,11 +46,7 @@ values
 INSERT INTO
       acl_class (id, class, class_id_type)
 values
-      (
-            1,
-            'ru.otus.spring.psannikov.spring.security.acl.models.Book',
-            'java.lang.Long'
-      );
+      (1, 'ru.otus.spring.psannikov.spring.security.acl.models.Book', 'java.lang.Long');
 
 insert into
       acl_object_identity (

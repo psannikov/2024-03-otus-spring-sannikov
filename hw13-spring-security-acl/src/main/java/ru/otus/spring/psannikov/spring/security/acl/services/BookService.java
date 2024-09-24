@@ -4,10 +4,9 @@ import ru.otus.spring.psannikov.spring.security.acl.models.Book;
 import ru.otus.spring.psannikov.spring.security.acl.models.Comment;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface BookService {
-    Optional<Book> findById(long id);
+    Book findById(long id);
 
     List<Book> findAll();
 
