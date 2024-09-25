@@ -84,7 +84,7 @@ class BookControllerTest {
     @DisplayName("редактировать книгу")
     @Test
     void editBookTest() throws Exception {
-        when(bookService.findById(ID)).thenReturn(Optional.ofNullable(mockBook));
+        when(bookService.findById(ID)).thenReturn(mockBook);
         when(bookService.update(ID, TITLE, ID, ID, mockComments)).thenReturn(mockBook);
         BookDto expectedResult = BookDto.toDto(mockBook);
         mvc.perform(MockMvcRequestBuilders

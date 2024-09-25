@@ -74,7 +74,7 @@ public class BookPageControllerTest {
     @DisplayName("вернуть страницу редактирования книги")
     @Test
     void editBookPageTest() throws Exception {
-        when(bookService.findById(ID)).thenReturn(Optional.ofNullable(mockBook));
+        when(bookService.findById(ID)).thenReturn(mockBook);
         when(authorService.findAll()).thenReturn(mockAuthors);
         when(genreService.findAll()).thenReturn(mockGenres);
         mvc.perform(MockMvcRequestBuilders.get("/edit/{id}", ID))
@@ -105,7 +105,7 @@ public class BookPageControllerTest {
     @DisplayName("вернуть страницу удаления книги")
     @Test
     public void deleteBookPageTest() throws Exception {
-        when(bookService.findById(ID)).thenReturn(Optional.ofNullable(mockBook));
+        when(bookService.findById(ID)).thenReturn(mockBook);
         mvc.perform(MockMvcRequestBuilders.get("/delete/{id}", ID))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.view().name("deleteBook"))

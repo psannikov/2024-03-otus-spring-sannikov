@@ -61,8 +61,7 @@ public class BookServiceImplTest {
     public void findByIdTest() {
         when(bookRepository.findById(ID)).thenReturn(Optional.of(mockBook));
         var actualBook = bookService.findById(ID);
-        assertThat(actualBook).isNotEmpty();
-        assertThat(actualBook.get()).isEqualTo(mockBook);
+        assertThat(actualBook).isEqualTo(mockBook);
     }
 
     @DisplayName("должен загружать все книги")

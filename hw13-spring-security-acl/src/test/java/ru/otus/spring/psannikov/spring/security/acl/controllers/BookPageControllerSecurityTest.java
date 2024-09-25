@@ -72,7 +72,7 @@ public class BookPageControllerSecurityTest {
             "/delete/1, deleteBook",
     }, ignoreLeadingAndTrailingWhitespace = true)
     public void parametrizedTestWithUser(String requestUrl, String responseUrl) throws Exception {
-        when(bookService.findById(id)).thenReturn(Optional.ofNullable(mockBook));
+        when(bookService.findById(id)).thenReturn(mockBook);
         mvc.perform(MockMvcRequestBuilders
                         .get(requestUrl)
                         .with(user(userDetails)))
