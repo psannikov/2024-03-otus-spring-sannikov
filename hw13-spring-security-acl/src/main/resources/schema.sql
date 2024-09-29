@@ -8,6 +8,8 @@ DROP TABLE IF EXISTS genres;
 
 DROP TABLE IF EXISTS users;
 
+DROP TABLE IF EXISTS roles;
+
 DROP TABLE IF EXISTS acl_entry;
 
 DROP TABLE IF EXISTS acl_object_identity;
