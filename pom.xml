@@ -118,6 +118,7 @@
         <module>hw12-spring-security-auth</module>
         <module>hw15-spring-integration</module>
         <module>hw16-data-rest</module>
+        <module>hw17-docker</module>
     </modules>
 
     <properties>
