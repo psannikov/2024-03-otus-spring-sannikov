@@ -114,7 +114,13 @@
         <module>cw31-data-rest</module>
         <module>cw31-data-rest/spring-31-exercise</module>
         <module>cw31-data-rest/spring-31-solution</module>
+        <module>hw11-webflux</module>
         <module>hw12-spring-security-auth</module>
+        <module>hw13-spring-security-acl</module>
+        <module>hw14-spring-batch</module>
+        <module>hw15-spring-integration</module>
+        <module>hw16-data-rest</module>
+        <module>hw17-docker</module>
         <module>hw18-hystrix</module>
     </modules>
 
