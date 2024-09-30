@@ -1,0 +1,23 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/libraryDB
+    username: usr
+    password: pwd
+  sql:
+    init:
+      mode: always
+
+  jpa:
+    open-in-view: false
+    generate-ddl: false
+    hibernate:
+      ddl-auto: none
+
+    show-sql: true
+  h2:
+    console:
+      enabled: true
+
+logging:
+  level:
+    ROOT: WARN
