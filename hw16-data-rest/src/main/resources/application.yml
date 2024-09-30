@@ -1,0 +1,40 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:testdb
+  sql:
+    init:
+      mode: always
+
+  jpa:
+    open-in-view: false
+    generate-ddl: false
+    hibernate:
+      ddl-auto: none
+
+    show-sql: true
+  h2:
+    console:
+      enabled: true
+  data:
+    rest:
+      base-path: /datarest
+management:
+  endpoint:
+    health:
+      show-details: always
+    metrics:
+      enabled: true
+    logfile:
+      enabled: true
+  health:
+    defaults:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: health, metrics, logfile
+logging:
+  level:
+    ROOT: INFO
+  file:
+    name: LibraryLog.log
