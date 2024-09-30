@@ -1,0 +1,21 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/liteTaskTrackerDB
+    username: postgres #подумать над секретными конфигурациями
+    password: postgres #подумать над секретными конфигурациями
+  sql:
+    init:
+      mode: always
+  jpa:
+    generate-ddl: false
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+
+logging:
+  level:
+    sql: DEBUG
+    ROOT: ERROR

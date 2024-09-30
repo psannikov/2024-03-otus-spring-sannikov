@@ -1,0 +1,10 @@
+server:
+  port: 8081
+
+logging:
+  level:
+    ROOT: WARN
+
+bot:
+  name: LiteTaskTracker_bot
+  token: 8037399289:AAF6XnN8NJd4S_b3BwoIvsyLfQcKfgVFstI
