@@ -66,14 +66,14 @@ public class Task {
     @JoinColumn(name = "task_id")
     private List<Work> works;
 
-    @ManyToOne(targetEntity = Task.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL, optional = true)
+    @ManyToOne(targetEntity = Task.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "parent_id")
     private Task parent;
 
-    @Column(name = "start_date", nullable = false, unique = false)
+    @Column(name = "start_date", nullable = false)
     private Date startDate;
 
-    @Column(name = "end_date", nullable = true, unique = false)
+    @Column(name = "end_date")
     private Date endDate;
 
     @ManyToOne(targetEntity = User.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)

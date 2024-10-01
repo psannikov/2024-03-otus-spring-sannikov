@@ -1,9 +1,8 @@
 package ru.otus.spring.psannikov.lite.task.tracker.services;
 
-import ru.otus.spring.psannikov.lite.task.tracker.dtos.WorkDto;
+import ru.otus.spring.psannikov.lite.task.tracker.dtos.TaskDto;
 import ru.otus.spring.psannikov.lite.task.tracker.models.Task;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -14,9 +13,9 @@ public interface TaskService {
 
     List<Task> findAll();
 
-    Task insert(String title, String description, long priorityId, long statusId, List<WorkDto> works, long parentId, Date startDate, Date endDate, long ownerId);
+    Task insert(TaskDto taskDto);
 
-    Task update(long id, String title, String description, long priorityId, long statusId, List<WorkDto> works, long parentId, Date startDate, Date endDate, long ownerId);
+    Task update(TaskDto taskDto);
 
     void deleteById(long id);
 

@@ -24,7 +24,6 @@ public class UserDetailServiceImpl implements UserDetailsService {
                 .username(user.getLogin())
                 .password(user.getPassword())
                 .roles("ADMIN")
-//                .roles(user.getRoles().stream().map(Role::getName).toArray(String[]::new))
                 .build();
     }
 }

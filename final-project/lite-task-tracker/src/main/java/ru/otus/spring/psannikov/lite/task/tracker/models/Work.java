@@ -38,10 +38,10 @@ public class Work {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "description", nullable = false, unique = false)
+    @Column(name = "description", nullable = false)
     private String description;
 
-    @Column(name = "date", nullable = false, unique = false)
+    @Column(name = "date", nullable = false)
     private Date date;
 
     @ManyToOne(targetEntity = User.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY)

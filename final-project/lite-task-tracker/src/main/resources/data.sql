@@ -2,7 +2,6 @@ insert into departments (name) values ('Department_1'), ('Department_1');
 insert into users (name, email, login, password, department_id) values
 ('User1', 'email@example.com','user1','password1',1),
 ('User2', 'psannikov87@gmail.com','user2','password2',1);
---insert into roles (name, user_id) values('ADMIN',1), ('READER',1), ('READER', 2);
 insert into priorities (description) values ('LOW'), ('MIDLE'), ('HIGHT');
 insert into statuses (description) values ('TO-DO'), ('IN-PROGRESS'), ('DONE'), ('PAUSED');
 insert into tasks (title, description, priority_id, status_id, parent_id, start_date, end_date, owner_id) values

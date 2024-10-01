@@ -8,10 +8,7 @@ DROP TABLE if exists tasks CASCADE;
 
 DROP TABLE if exists users CASCADE;
 
-DROP TABLE IF EXISTS roles;
-
 DROP TABLE if exists works CASCADE;
-
 
 create table departments (id bigserial,
                           name varchar(255),
@@ -23,13 +20,6 @@ create table users (id bigserial,
                     password varchar(255),
                     department_id bigint references departments (id) on delete cascade,
                     primary key (id));
-CREATE TABLE
-      roles (
-            id bigserial,
-            name varchar(255) NOT NULL,
-            user_id bigint REFERENCES users (id) ON DELETE CASCADE,
-            PRIMARY KEY (id)
-      );
 create table priorities (id bigserial,
                          description varchar(255),
                          primary key (id));

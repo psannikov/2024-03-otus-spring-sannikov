@@ -36,30 +36,17 @@ public class TaskController {
 
     @PostMapping("/api/v1/task/{id}")
     public TaskDto update(@PathVariable Long id, @RequestBody TaskDto taskDto) {
-        var task = taskService.update(id,
-                taskDto.getTitle(),
-                taskDto.getDescription(),
-                taskDto.getPriorityId(),
-                taskDto.getStatusId(),
-                taskDto.getWorks(),
-                taskDto.getParentId(),
-                taskDto.getStartDate(),
-                taskDto.getEndDate(),
-                taskDto.getOwnerId());
+        if (taskDto.getId() != id) {
+            new RuntimeException("Нельзя изменять ID задачи");
+        }
+        taskDto.setId(id);
+        var task = taskService.update(taskDto);
         return TaskDto.toDto(task);
     }
 
     @PostMapping("/api/v1/task")
     public TaskDto insert(@RequestBody TaskDto taskDto) {
-        var task = taskService.insert(taskDto.getTitle(),
-                taskDto.getDescription(),
-                taskDto.getPriorityId(),
-                taskDto.getStatusId(),
-                taskDto.getWorks(),
-                taskDto.getParentId(),
-                taskDto.getStartDate(),
-                taskDto.getEndDate(),
-                taskDto.getOwnerId());
+        var task = taskService.insert(taskDto);
         return TaskDto.toDto(task);
     }
 

@@ -2,7 +2,7 @@ package ru.otus.spring.psannikov.lite.task.tracker.services;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import ru.otus.spring.psannikov.lite.task.tracker.models.Department;
+import ru.otus.spring.psannikov.lite.task.tracker.dtos.UserDto;
 import ru.otus.spring.psannikov.lite.task.tracker.models.User;
 
 import java.util.List;
@@ -22,12 +22,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User insert(String name, String email, String login, String password, Department department) {
+    public User insert(UserDto userDto) {
         return null;
     }
 
     @Override
-    public User update(long id, String name, String email, String login, String password, Department department) {
+    public User update(UserDto userDto) {
         return null;
     }
 

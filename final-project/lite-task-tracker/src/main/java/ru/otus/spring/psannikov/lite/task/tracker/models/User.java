@@ -35,7 +35,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "name", nullable = false, unique = false)
+    @Column(name = "name", nullable = false)
     private String name;
 
     @Column(name = "email", nullable = false, unique = true)
@@ -44,15 +44,10 @@ public class User {
     @Column(name = "login", nullable = false, unique = true)
     private String login;
 
-    @Column(name = "password", nullable = false, unique = false)
+    @Column(name = "password", nullable = false)
     private String password;
 
     @ManyToOne(targetEntity = Department.class, fetch = FetchType.LAZY)
     @JoinColumn(name = "department_id")
     private Department department;
-
-//    @OneToMany(targetEntity = Role.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-//    @JoinColumn(name = "user_id")
-//    private Set<Role> roles;
-//    private String role;
 }
