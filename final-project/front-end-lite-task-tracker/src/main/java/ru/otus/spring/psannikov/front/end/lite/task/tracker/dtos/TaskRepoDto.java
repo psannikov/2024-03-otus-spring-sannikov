@@ -16,19 +16,19 @@ public class TaskRepoDto {
 
     private String title;
 
-    private String task_description;
+    private String taskDescription;
 
     private String priority;
 
     private String status;
 
-    private String parent_task;
+    private String parentTask;
 
-    private String start_date;
+    private String startDate;
 
-    private String end_date;
+    private String endDate;
 
     private String owner;
 
-    private String last_work;
+    private String lastWork;
 }

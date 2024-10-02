@@ -21,7 +21,7 @@ public class TaskShortDto {
         return TaskShortDto.builder()
                 .id(dto.getId())
                 .title(dto.getTitle())
-                .taskDescription(dto.getTask_description())
+                .taskDescription(dto.getTaskDescription())
                 .build();
     }
 }

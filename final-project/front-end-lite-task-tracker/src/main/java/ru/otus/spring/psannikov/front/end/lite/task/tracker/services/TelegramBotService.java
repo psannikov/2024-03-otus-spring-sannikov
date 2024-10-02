@@ -3,10 +3,13 @@ package ru.otus.spring.psannikov.front.end.lite.task.tracker.services;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
+import org.telegram.telegrambots.meta.api.methods.send.SendDocument;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import ru.otus.spring.psannikov.front.end.lite.task.tracker.dtos.TaskShortDto;
+import java.io.File;
+import java.io.IOException;
 
 @Service
 @RequiredArgsConstructor
@@ -63,13 +66,24 @@ public class TelegramBotService extends TelegramLongPollingBot {
     }
 
     private void reportCommandReceived(long chatId) {
-        var tasks = dataService.getTasksInWork();
-        String tasksString = "";
-        for (TaskShortDto task : tasks) {
-            tasksString = tasksString + task.getId() + "|" + task.getTitle() + "|" + task.getTaskDescription() + "\n";
+//        var tasks = dataService.getTasksInWork();
+//        String tasksString = "";
+//        for (TaskShortDto task : tasks) {
+//            tasksString = tasksString + task.getId() + "|" + task.getTitle() + "|" + task.getTaskDescription() + "\n";
+//        }
+//        var answer = "Список всех задач в работе:\n" +
+//                "ID | Title | Description\n" + tasksString;
+        var tasks = dataService.getAllData();
+        File xlsxFile = excelExportService.exportTasksToExcel(tasks);
+        SendDocument sendDocumentRequest = new SendDocument();
+        sendDocumentRequest.setChatId(String.valueOf(chatId));
+        sendDocumentRequest.setDocument(new org.telegram.telegrambots.meta.api.objects.InputFile(xlsxFile));
+        try {
+        execute(sendDocumentRequest);
+        } catch (TelegramApiException e) {
+            e.printStackTrace();
         }
-        var answer = "Список всех задач в работе:\n" +
-                "ID | Title | Description\n" + tasksString;
+        var answer = "Список всех задач подготовлен";
         sendMessage(chatId, answer);
     }
 
