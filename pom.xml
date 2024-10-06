@@ -114,6 +114,13 @@
         <module>cw31-data-rest</module>
         <module>cw31-data-rest/spring-31-exercise</module>
         <module>cw31-data-rest/spring-31-solution</module>
+        <module>cw32-http-client</module>
+        <module>cw32-http-client/rest-template</module>
+        <module>cw32-http-client/soap-client</module>
+        <module>cw32-http-client/soap-server</module>
+        <module>cw33-docker</module>
+        <module>cw33-docker/docker-compose-example</module>
+        <module>cw34-kubernetes</module>
         <module>cw35-37-spring-cloud</module>
         <module>cw35-37-spring-cloud/configuration-server</module>
         <module>cw35-37-spring-cloud/currency-conversion</module>
@@ -123,6 +130,14 @@
         <module>cw35-37-spring-cloud/rent-fare</module>
         <module>cw35-37-spring-cloud/rent-service</module>
         <module>cw35-37-spring-cloud/zuul-service-gateway</module>
+        <module>hw11-webflux</module>
+        <module>hw12-spring-security-auth</module>
+        <module>hw13-spring-security-acl</module>
+        <module>hw14-spring-batch</module>
+        <module>hw15-spring-integration</module>
+        <module>hw16-data-rest</module>
+        <module>hw17-docker</module>
+        <module>hw18-hystrix</module>
     </modules>
 
     <properties>
