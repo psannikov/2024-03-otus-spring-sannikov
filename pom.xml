@@ -120,6 +120,7 @@
         <module>cw32-http-client/soap-server</module>
         <module>cw33-docker</module>
         <module>cw33-docker/docker-compose-example</module>
+        <module>cw34-kubernetes</module>
     </modules>
 
     <properties>
