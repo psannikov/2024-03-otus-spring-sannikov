@@ -1,0 +1,15 @@
+server:
+  port: 8081
+
+logging:
+  level:
+    ROOT: WARN
+
+bot:
+  name: ${BOT_NAME}
+  token: ${BOT_TOKEN}
+application:
+  url:
+    allTask: http://localhost:8080/api/v1/task
+    findByIdTask: http://localhost:8080/api/v1/task/%d
+  fileName: Task.xlsx
