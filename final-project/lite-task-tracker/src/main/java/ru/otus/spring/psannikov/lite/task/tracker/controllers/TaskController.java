@@ -11,7 +11,6 @@ import ru.otus.spring.psannikov.lite.task.tracker.dtos.TaskDto;
 import ru.otus.spring.psannikov.lite.task.tracker.services.TaskService;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -53,11 +52,5 @@ public class TaskController {
     @DeleteMapping("/api/v1/task/{id}")
     public void delete(@PathVariable Long id) {
         taskService.deleteById(id);
-    }
-
-
-    @GetMapping("/api/v1/rawrepo")
-    public List<Map<String, Object>> getRawRepo() {
-        return taskService.getRawRepo();
     }
 }

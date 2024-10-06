@@ -3,9 +3,9 @@ server:
 
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/liteTaskTrackerDB
-    username: postgres #подумать над секретными конфигурациями
-    password: postgres #подумать над секретными конфигурациями
+    url: jdbc:postgresql://localhost:5432/${DB_NAME}
+    username: ${USERNAME_DB}
+    password: ${PASSWORD_DB}
   sql:
     init:
       mode: always
@@ -17,5 +17,5 @@ spring:
 
 logging:
   level:
-    sql: DEBUG
-    ROOT: ERROR
+    sql: WARN
+    ROOT: WARN

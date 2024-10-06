@@ -1,38 +1,55 @@
 package ru.otus.spring.psannikov.front.end.lite.task.tracker.services;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendDocument;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
-import ru.otus.spring.psannikov.front.end.lite.task.tracker.dtos.TaskShortDto;
+import ru.otus.spring.psannikov.front.end.lite.task.tracker.converter.TaskConverter;
+import ru.otus.spring.psannikov.front.end.lite.task.tracker.dtos.TaskDto;
+
 import java.io.File;
-import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
 public class TelegramBotService extends TelegramLongPollingBot {
 
-    private final String botName = "LiteTaskTracker_bot";
+    @Value("${bot.name}")
+    private String botName;
 
-    private final String token = "8037399289:AAF6XnN8NJd4S_b3BwoIvsyLfQcKfgVFstI";
+    @Value("${BOT_TOKEN}")
+    private String token;
 
     private final DataService dataService;
 
     private final ExcelExportService excelExportService;
+
+    private final TaskConverter taskConverter;
+
+    private final Map<Long, Boolean> chatState = new HashMap<>();
 
     @Override
     public void onUpdateReceived(Update update) {
         if (update.hasMessage() && update.getMessage().hasText()) {
             String messageText = update.getMessage().getText();
             long chatId = update.getMessage().getChatId();
-            switch (messageText) {
-                case "/start" -> startCommandReceived(chatId, update.getMessage().getChat().getFirstName());
-                case "/tasks" -> tasksCommandReceived(chatId);
-                case "/report" -> reportCommandReceived(chatId);
-                default -> sendMessage(chatId, "Данная команда не поддерживается, список доступных команд /start");
+
+            if (chatState.containsKey(chatId) && chatState.get(chatId)) {
+                handleTaskNumberInput(chatId, messageText);
+            } else {
+                switch (messageText) {
+                    case "/start" -> startCommandReceived(chatId);
+                    case "/tasks" -> tasksCommandReceived(chatId);
+                    case "/task" -> taskComandReceived(chatId);
+                    case "/report" -> reportCommandReceived(chatId);
+//                    case "/test" -> test(chatId);
+                    default -> sendMessage(chatId, "Данная команда не поддерживается, список доступных команд /start");
+                }
             }
         }
     }
@@ -47,18 +64,20 @@ public class TelegramBotService extends TelegramLongPollingBot {
         return token;
     }
 
-    private void startCommandReceived(long chatId, String name) {
+    private void startCommandReceived(long chatId) {
         String answer = "Список доступных команд:\n" +
                 "/tasks - список всех задач\n" +
-                "/report - подготовка отчета, будет запрошен вариант доставки";
+                "/task - детали задачи, будет запрошен номер\n" +
+                "/report - подготовка отчета, будет запрошен вариант доставки\n" +
+                "/test - разработка методов";
         sendMessage(chatId, answer);
     }
 
     private void tasksCommandReceived(long chatId) {
         var tasks = dataService.getTasksInWork();
         String tasksString = "";
-        for (TaskShortDto task : tasks) {
-            tasksString = tasksString + task.getId() + "|" + task.getTitle() + "|" + "<a href=\"http://localhost:8080/api/v1/task/1\">Детали</a>\n";
+        for (TaskDto task : tasks) {
+            tasksString = tasksString + task.getId() + "|" + task.getTitle() + "|" + task.getDescription() + "\n";
         }
         var answer = "Список всех задач в работе:\n" +
                 "<b>ID | Title | Detail </b>\n" + tasksString;
@@ -66,25 +85,44 @@ public class TelegramBotService extends TelegramLongPollingBot {
     }
 
     private void reportCommandReceived(long chatId) {
-//        var tasks = dataService.getTasksInWork();
-//        String tasksString = "";
-//        for (TaskShortDto task : tasks) {
-//            tasksString = tasksString + task.getId() + "|" + task.getTitle() + "|" + task.getTaskDescription() + "\n";
-//        }
-//        var answer = "Список всех задач в работе:\n" +
-//                "ID | Title | Description\n" + tasksString;
-        var tasks = dataService.getAllData();
+        var tasks = dataService.getAllTasks();
         File xlsxFile = excelExportService.exportTasksToExcel(tasks);
         SendDocument sendDocumentRequest = new SendDocument();
         sendDocumentRequest.setChatId(String.valueOf(chatId));
         sendDocumentRequest.setDocument(new org.telegram.telegrambots.meta.api.objects.InputFile(xlsxFile));
         try {
-        execute(sendDocumentRequest);
+            execute(sendDocumentRequest);
         } catch (TelegramApiException e) {
             e.printStackTrace();
         }
         var answer = "Список всех задач подготовлен";
         sendMessage(chatId, answer);
+    }
+
+    private void taskComandReceived(long chatId) {
+        sendMessage(chatId, "Введите номер задачи (от 1 до 1000):");
+        chatState.put(chatId, true);
+    }
+
+    private void handleTaskNumberInput(long chatId, String messageText) {
+        try {
+            int taskId = Integer.parseInt(messageText);
+            if (taskId >= 1 && taskId <= 1000) {
+                var res = dataService.getTasksById(taskId);
+                if (res.isPresent()) {
+                    var answer = taskConverter.taskToString(res.get());
+                    sendMessage(chatId, answer);
+                } else {
+                    sendMessage(chatId, "Задача с таким номером не найдена.");
+                }
+            } else {
+                sendMessage(chatId, "Пожалуйста, введите число от 1 до 1000.");
+            }
+        } catch (NumberFormatException e) {
+            sendMessage(chatId, "Некорректный ввод. Введите число от 1 до 1000.");
+        } finally {
+            chatState.put(chatId, false);
+        }
     }
 
     private void sendMessage(long chatId, String text) {

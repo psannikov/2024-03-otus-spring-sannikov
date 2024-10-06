@@ -72,4 +72,17 @@
 
     </dependencies>
 
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <finalName>${project.artifactId}</finalName>
+                    <mainClass>ru.otus.spring.psannikov.front.end.lite.task.tracker.Application</mainClass>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
 </project>

@@ -1,10 +1,10 @@
 package ru.otus.spring.psannikov.lite.task.tracker.services;
 
-import ru.otus.spring.psannikov.lite.task.tracker.exceptions.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.otus.spring.psannikov.lite.task.tracker.dtos.TaskDto;
 import ru.otus.spring.psannikov.lite.task.tracker.dtos.WorkDto;
+import ru.otus.spring.psannikov.lite.task.tracker.exceptions.EntityNotFoundException;
 import ru.otus.spring.psannikov.lite.task.tracker.models.Task;
 import ru.otus.spring.psannikov.lite.task.tracker.repositories.PriorityRepository;
 import ru.otus.spring.psannikov.lite.task.tracker.repositories.StatusRepository;
@@ -12,7 +12,6 @@ import ru.otus.spring.psannikov.lite.task.tracker.repositories.TaskRepository;
 import ru.otus.spring.psannikov.lite.task.tracker.repositories.UserRepository;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -50,11 +49,6 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public void deleteById(long id) {
         taskRepository.deleteById(id);
-    }
-
-    @Override
-    public List<Map<String, Object>> getRawRepo() {
-        return taskRepository.findAllRepo();
     }
 
     private Task save(TaskDto taskDto) {

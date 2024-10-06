@@ -24,9 +24,13 @@ public class TaskDto {
 
     private long statusId;
 
+    private String statusDescription;
+
     private List<WorkDto> works;
 
     private long parentId;
+
+    private String parentName;
 
     private Date startDate;
 
@@ -37,11 +41,14 @@ public class TaskDto {
     public static TaskDto toDto(Task task) {
         return TaskDto.builder()
                 .id(task.getId())
+                .title(task.getTitle())
                 .description(task.getDescription())
                 .priorityId(task.getPriority().getId())
                 .statusId(task.getStatus().getId())
+                .statusDescription(task.getStatus().getDescription())
                 .works(task.getWorks().stream().map(WorkDto::toDto).toList())
                 .parentId(task.getParent() != null ? task.getParent().getId() : 0L)
+                .parentName(task.getParent() != null ? task.getParent().getTitle() : "")
                 .startDate(task.getStartDate())
                 .endDate(task.getEndDate())
                 .ownerId(task.getOwner().getId())

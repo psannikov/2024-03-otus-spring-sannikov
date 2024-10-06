@@ -4,7 +4,6 @@ import ru.otus.spring.psannikov.lite.task.tracker.dtos.TaskDto;
 import ru.otus.spring.psannikov.lite.task.tracker.models.Task;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 public interface TaskService {
@@ -18,6 +17,4 @@ public interface TaskService {
     Task update(TaskDto taskDto);
 
     void deleteById(long id);
-
-    List<Map<String, Object>> getRawRepo();
 }
