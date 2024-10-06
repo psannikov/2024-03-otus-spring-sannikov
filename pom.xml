@@ -138,6 +138,12 @@
         <module>hw16-data-rest</module>
         <module>hw17-docker</module>
         <module>hw18-hystrix</module>
+        <module>cw38-rabbit</module>
+        <module>cw38-rabbit/user-activity-emitter-microservice</module>
+        <module>cw38-rabbit/user-activity-models</module>
+        <module>cw38-rabbit/user-activity-processor-microservice</module>
+        <module>cw39-kafka</module>
+        <module>cw40-kafka-webflux</module>
     </modules>
 
     <properties>
