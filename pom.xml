@@ -121,6 +121,15 @@
         <module>cw33-docker</module>
         <module>cw33-docker/docker-compose-example</module>
         <module>cw34-kubernetes</module>
+        <module>cw35-37-spring-cloud</module>
+        <module>cw35-37-spring-cloud/configuration-server</module>
+        <module>cw35-37-spring-cloud/currency-conversion</module>
+        <module>cw35-37-spring-cloud/currency-conversion-2</module>
+        <module>cw35-37-spring-cloud/eureka-discovery-server</module>
+        <module>cw35-37-spring-cloud/hystrix-dashboard</module>
+        <module>cw35-37-spring-cloud/rent-fare</module>
+        <module>cw35-37-spring-cloud/rent-service</module>
+        <module>cw35-37-spring-cloud/zuul-service-gateway</module>
         <module>hw11-webflux</module>
         <module>hw12-spring-security-auth</module>
         <module>hw13-spring-security-acl</module>
