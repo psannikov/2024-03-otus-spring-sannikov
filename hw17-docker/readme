@@ -1,0 +1,7 @@
+1. Собрал JAR приложение (оно ожидаемое оказалось в /target/hw17-docker-3.3.0.jar)
+2. Из корня модуля (собственно где находится Dockerfile) запускаю:
+    docker build -t hw17-docker:v1.1 .
+3. После завершения созданиея image проверяю что он создался:
+    docker image ls
+4. Запускаю созданный image:
+    docker run -p 8080:8080 hw17-docker:v1.1
